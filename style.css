@@ -1,0 +1,60 @@
+
+* {
+  margin: 0;
+
+}
+
+
+ .parte1{
+  position: relative;
+  width: auto;
+  margin: 0;
+ }
+ .parte2{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
+  justify-self: center;
+  margin: 0%;
+  
+ }
+ .parte1 svg{
+  width: 100vw;
+  height: auto;
+ }
+
+ #efeitoDoMenu {
+  text-align: center;
+ }
+ #efeitoDoMenu svg {
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 15%;
+  height: auto;
+ }
+#botaoMenu{
+  text-align: center;
+}
+#botaoMenu svg {
+  left: 50%;
+  width: 4%;
+  height: auto;
+  transform: translate(-50%,0%);
+  position: absolute;
+    
+ }
+
+
+
+
+
+
+ .container{
+  position: relative;
+ }
+ .grid-container{
+  position: relative;
+ }
