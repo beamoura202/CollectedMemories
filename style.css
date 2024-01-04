@@ -53,15 +53,27 @@ overflow-x: hidden;
  }
  .grid-container{
   position: relative;
+  display: grid;
   z-index: -1;
  }
 .grid-item {
   position: relative;
-  width: 100vw;
+  display: flex;
+   flex-direction: row; /* Stack child elements vertically */
+  align-items: center; /* Center child elements horizontally */
+  width: auto;
   height: 40vh;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+
+/*padding para nao ficar a tras das laterais*/
+  padding-left: 100px;
+  padding-right: 100px;
+  /*padding para ficar em cima da prateleira*/
+  padding-bottom: 50px;
+
+
 }
 
 /* Alternating background images using nth-child selector */
@@ -74,10 +86,57 @@ overflow-x: hidden;
 }
 
 
+.caneca{
+  /*alinha as canecas ao centro da sua div*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto; 
+}
 
+.caneca img {
+  /*define o tamanh das canecas*/
+  width: 45%;
+  height: auto;
+}
+
+/*POP UP de traz de cada chavena*/
+.efeitoPOP{
+  width: 100%;
+  height: 100%;
+}
+
+#efeitoDoMenu {
+  text-align: center;
+ }
+ #efeitoDoMenu svg {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 15%;
+  height: auto;
+ }
+#botaoMenu{
+  text-align: center;
+}
+#botaoMenu svg {
+  left: 50%;
+  width: 4%;
+  height: auto;
+  transform: translate(-50%,0%);
+  position: absolute;
+    
+ }
 
 
 /*LATERAIS DO MOVEL*/
+.BarrasLaterais{
+  position: sticky;
+  left: 0;
+  height: 100vh;
+  top:0;
+}
 .lateralEsq svg{
   position: absolute;
   top:0;
@@ -86,21 +145,20 @@ overflow-x: hidden;
   height: 100%;
   z-index: 20;
 }
-.lateralDir{
-  width: 5vw;
-  height: 100%;
-}
-.lateralDir svg{
-  transform: scaleX(-1); /* Flip horizontally */
+.lateralDir {
   position: absolute;
-  top:0;
-  right: -50px;
-  width: auto;
+  top: 0;
+  right: 0;
+  width: auto; /* Adjust as needed */
   height: 100%;
   z-index: 20;
 }
 
-
+.lateralDir svg {
+  transform: scaleX(-1);
+  width: 100%;
+  height: 100%;
+}
 
 
 
