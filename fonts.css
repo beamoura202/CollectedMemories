@@ -37,3 +37,11 @@
     src: url(fonts/antonio/Antonio-VariableFont_wght.ttf);
     /*font weigth em 100-ligth 400-regular 800-bold*/
  }
+
+  /*SquarePeg*/
+  @font-face {
+    font-family: "SquarePeg";
+    src: url(/fonts/squarePeg/SquarePeg-Regular.ttf);
+    font-weight: normal;
+ }
+
