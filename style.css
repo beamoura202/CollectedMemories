@@ -326,24 +326,33 @@ svg{
   padding: 20px; 
   margin-top: 50px;
   margin-bottom: 50px;
-  color: aliceblue;
+  
 }
 
 .TextoAbout h1 {
-  font-size: 5rem; 
+  font-size: 5.7rem; 
   
-  
+  font-family: 'Philosopher',sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  color: #ffffff;
+  padding-bottom: 50px;
 
 }
 .TextoAbout h2 {
   font-size: 3rem; 
-  
+  font-family: 'SquarePeg',sans-serif;
+  font-weight:100;
+  color: #ffffff;
 }
 
 
 .TextoAbout p {
   font-size: 1.5rem; 
   font-family: 'Philosopher',sans-serif;
+  color: #ffffffad;
+  font-weight:normal;
+  
 }
 /*tablet*/
 @media (max-width: 900px) {
