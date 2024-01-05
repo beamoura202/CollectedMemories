@@ -230,3 +230,93 @@ footer svg{
 svg{
   overflow: hidden;
 }
+
+
+
+
+/*ABOURT*/
+.fundoAbout{
+  position: absolute;
+  top:0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('PecasArmario/tudoJunto_01.svg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow-y: hidden;
+}
+
+
+
+.ContentAbout {
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  margin-bottom: 50px;
+  display: flex;
+}
+
+.ImagemAbout {
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: flex-end;
+}
+
+.ImagemAbout img {
+  width: 100%;
+  height: auto;
+}
+
+.TextoAbout {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px; 
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: aliceblue;
+}
+
+.TextoAbout h1 {
+  font-size: 5rem; 
+}
+.TextoAbout h2 {
+  font-size: 3rem; 
+}
+
+
+.TextoAbout p {
+  font-size: 1.5rem; 
+}
+
+@media (max-width: 720px) {
+  .ContentAbout {
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    padding: 20px;
+    overflow-x: hidden;
+    top:0;
+
+  }
+
+  .ImagemAbout {
+    width: 100%;
+    order: 2; 
+    align-items: flex-start; 
+  }
+
+  .TextoAbout {
+    width: auto;
+    order: 1; 
+    padding: 20px; 
+  }
+}
