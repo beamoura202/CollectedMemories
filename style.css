@@ -135,20 +135,37 @@ overflow-x: hidden;
 }
 
 .textoPOP{
-  height: auto;
+  height: 30%;
+  width: 100%;
   position: absolute;
   z-index: 2;
-  top:0;
-  left:0;
+  bottom:50%;
+  left:13%;
+  transform: translate(0%, -50%); /* Center the .efeitoPOP */
+
+  display: flex;
+  align-items: end;
+  margin-top: auto;
   
-  
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
 }
+  
+  
+
 .TextCurv{
-  font-size: 3rem;
+  font-size: 3em;
   fill: rgb(0, 0, 0);
+  position: absolute;
+  margin-top: auto;
+  height: auto;
+  justify-content: end;
+
 }
 #curve{
   fill:transparent;
+  
 }
 
 
