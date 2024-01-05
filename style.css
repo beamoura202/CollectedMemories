@@ -290,7 +290,7 @@ svg{
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  overflow-y: hidden;
+  
 }
 
 
@@ -340,8 +340,8 @@ svg{
 .TextoAbout p {
   font-size: 1.5rem; 
 }
-
-@media (max-width: 720px) {
+/*tablet*/
+@media (max-width: 900px) {
   .ContentAbout {
     flex-direction: column;
     height: auto;
@@ -349,6 +349,7 @@ svg{
     padding: 20px;
     overflow-x: hidden;
     top:0;
+   /* margin-bottom: 0;*/
 
   }
 
@@ -363,4 +364,12 @@ svg{
     order: 1; 
     padding: 20px; 
   }
+
+  /* Adjust the background height */
+  .fundoAbout {
+    overflow-y:auto;
+    height: 100%;
+
+  }
+  
 }
