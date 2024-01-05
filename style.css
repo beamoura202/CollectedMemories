@@ -331,14 +331,19 @@ svg{
 
 .TextoAbout h1 {
   font-size: 5rem; 
+  
+  
+
 }
 .TextoAbout h2 {
   font-size: 3rem; 
+  
 }
 
 
 .TextoAbout p {
   font-size: 1.5rem; 
+  font-family: 'Philosopher',sans-serif;
 }
 /*tablet*/
 @media (max-width: 900px) {
