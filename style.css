@@ -88,46 +88,69 @@ overflow-x: hidden;
 
 .caneca{
   /*alinha as canecas ao centro da sua div*/
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
   margin-top: auto; 
+  position: relative; /* Make the .caneca div a positioning context */
+
 }
 
 .caneca img {
   /*define o tamanh das canecas*/
   width: 45%;
   height: auto;
+  z-index: 2;
 }
 
-/*POP UP de traz de cada chavena*/
-.efeitoPOP{
-  width: 100%;
+/* POP UP behind each chavena */
+.efeitoPOP {
+  position: absolute;
+  bottom: 0%; /* Adjust the top position to 50% */
+  left: 50%; /* Adjust the left position to 50% */
+  transform: translate(-50%, 0%); /* Center the .efeitoPOP */
+  width: 65%;
   height: 100%;
+  z-index: 1; /* Push the .efeitoPOP behind the image */
+  display: flex;
+  align-items: end;
+  margin-top: auto;
+  
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+  
 }
 
-#efeitoDoMenu {
-  text-align: center;
- }
- #efeitoDoMenu svg {
+.efeitoPOP img {
+  /* Adjust the size of the .efeitoPOP image as needed */
   position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 15%;
+  width: 80%;
   height: auto;
- }
-#botaoMenu{
-  text-align: center;
+  z-index: 1;
+  justify-content: end;
+
 }
-#botaoMenu svg {
-  left: 50%;
-  width: 4%;
+
+.textoPOP{
   height: auto;
-  transform: translate(-50%,0%);
   position: absolute;
-    
- }
+  z-index: 2;
+  top:0;
+  left:0;
+  
+  
+}
+.TextCurv{
+  font-size: 3rem;
+  fill: rgb(0, 0, 0);
+}
+#curve{
+  fill:transparent;
+}
+
 
 
 /*LATERAIS DO MOVEL*/
