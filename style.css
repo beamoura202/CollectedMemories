@@ -139,11 +139,18 @@
 }
 
 .textoPOP{
+  width: 100%;
   height: auto;
   position: absolute;
   z-index: 2;
   top:0;
   left:0;
+}
+.textoPOP svg{
+  width: 100%;
+}
+.textoPOP path{
+  width: 100%;
 }
 
 .TextCurv{
