@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@cosmicjs/sdk": "^1.0.11"
+  }
+}
