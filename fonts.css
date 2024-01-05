@@ -1,13 +1,13 @@
 /*Philosopher*/
 @font-face {
     font-family: "Philosopher";
-    src:  url(/fonts/philosofer/Philosopher-Bold.ttf);
+    src:  url(fonts/philosofer/Philosopher-Bold.ttf);
     font-weight: bold;
  }
 
  @font-face {
     font-family: "Philosopher";
-    src:  url(/fonts/philosofer/Philosopher-Regular.ttf);
+    src:  url(fonts/philosofer/Philosopher-Regular.ttf);
     font-weight: normal;
  }
 
@@ -20,13 +20,13 @@
  /*Pastel Script*/
  @font-face {
     font-family: "OleoScript";
-    src: url(/fonts/pastelScript/OleoScript-Regular.ttf);
+    src: url(fonts/pastelScript/OleoScript-Regular.ttf);
     font-weight: normal;
  }
 
  @font-face {
     font-family: "OleoScript";
-    src: url(/fonts/pastelScript/OleoScript-Bold.ttf);
+    src: url(fonts/pastelScript/OleoScript-Bold.ttf);
     font-weight: bold;
  }
 
@@ -34,6 +34,6 @@
  /*Antonio*/
  @font-face {
     font-family: "Antonio";
-    src: url(/fonts/antonio/Antonio-VariableFont_wght.ttf);
+    src: url(fonts/antonio/Antonio-VariableFont_wght.ttf);
     /*font weigth em 100-ligth 400-regular 800-bold*/
  }
