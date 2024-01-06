@@ -337,7 +337,7 @@ svg{
   font-style: italic;
   color: #ffffff;
   padding-bottom: 50px;
-
+  
 }
 .TextoAbout h2 {
   font-size: 3rem; 
@@ -381,6 +381,127 @@ svg{
 
   /* Adjust the background height */
   .fundoAbout {
+    overflow-y:auto;
+    height: 100%;
+
+  }
+  
+}
+
+
+/*PaginaCanecas*/
+.fundoCanecas{
+  position: absolute;
+  top:0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('PecasArmario/tudoJunto_01.svg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  
+}
+.ContentCanecas {
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  margin-bottom: 50px;
+  display: flex;
+}
+
+.ImagemCanecas {
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.ImagemCanecas img {
+  width: 100%;
+  height: auto;
+}
+
+.TextoCanecas {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Align content at the bottom */
+  padding: 20px;
+  color: #00000095; /* Text color */
+}
+
+.TextoCanecas h2 {
+  font-size: 3rem;
+  font-family: 'SquarePeg', sans-serif;
+  font-weight: 100;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+.TextoCanecas p {
+  font-size: 1.3rem;
+  font-family: 'Philosopher', sans-serif;
+  font-weight: normal;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+.divTextoCanecas {
+  background-image: url(img/tag.png);
+  background-size: cover; /* or contain, depending on your preference */
+  background-position: center top;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Align content at the bottom */
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 1%;
+  justify-content: flex-end;
+
+}
+
+
+
+.divTextoCanecas h2,p{
+margin-left: 10%;
+margin-right: 10%;
+}
+
+
+
+
+/*tablet*/
+@media (max-width: 900px) {
+  .ContentCanecas {
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    padding: 20px;
+    overflow-x: hidden;
+    top:0;
+   /* margin-bottom: 0;*/
+
+  }
+
+  .ImagemCanecas {
+    width: 100%;
+    order: 2; 
+    align-items: flex-start; 
+  }
+
+  .TextoCanecas {
+    width: auto;
+    order: 1; 
+    padding: 20px; 
+  }
+
+  /* Adjust the background height */
+  .fundoCanecas {
     overflow-y:auto;
     height: 100%;
 
