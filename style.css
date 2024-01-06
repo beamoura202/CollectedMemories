@@ -417,7 +417,10 @@ svg{
   width: 50%;
   height: auto;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  margin-top: auto;
+  flex-direction: column;
+flex-wrap: nowrap;
   padding: 20px;
 }
 
@@ -433,8 +436,9 @@ svg{
   flex-direction: column;
   justify-content: flex-end; /* Align content at the bottom */
   padding: 20px;
-  color: #00000095; /* Text color */
+  color: #ffffff; /* Text color */
 }
+
 
 .TextoCanecas h2 {
   font-size: 3rem;
@@ -444,24 +448,23 @@ svg{
 }
 
 .TextoCanecas p {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-family: 'Philosopher', sans-serif;
   font-weight: normal;
   margin-bottom: 20px; /* Adjust as needed */
 }
 
 .divTextoCanecas {
-  background-image: url(img/tag.png);
   background-size: cover; /* or contain, depending on your preference */
   background-position: center top;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Align content at the bottom */
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 5%;
+  margin-right: 5%;
   padding: 1%;
-  justify-content: flex-end;
+  justify-content: center;
 
 }
 
@@ -477,6 +480,33 @@ margin-right: 10%;
 
 /*tablet*/
 @media (max-width: 900px) {
+
+  .fundoCanecas{
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 60vh;
+    background-image: url('PecasArmario/tudoJunto_01.svg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+  }
+  .fundoCanecas2{
+    position: absolute;
+    bottom:0;
+    left: 0;
+    z-index: -2;
+    width: 100vw;
+    height:40vh;
+    background-image: url('PecasArmario/tudoJunto_01.svg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+  }
   .ContentCanecas {
     flex-direction: column;
     height: auto;
@@ -484,27 +514,69 @@ margin-right: 10%;
     padding: 20px;
     overflow-x: hidden;
     top:0;
+    display: block;
+    overflow-y: hidden;
    /* margin-bottom: 0;*/
 
   }
-
-  .ImagemCanecas {
-    width: 100%;
+  .ImagemCanecas img {
+    width: 70%;
     order: 2; 
-    align-items: flex-start; 
   }
-
+  .ImagemCanecas{
+    width: 100%;
+    height: 54vh;
+    margin: 0%;
+    padding: 0%;
+    justify-content: end;
+  }
   .TextoCanecas {
     width: auto;
     order: 1; 
     padding: 20px; 
+    overflow-y: scroll;
+   
+  }
+  .ContentCanecas .TextoCanecas{
+    overflow-y: scroll;
   }
 
   /* Adjust the background height */
   .fundoCanecas {
-    overflow-y:auto;
-    height: 100%;
+    
+    
 
   }
   
+}
+
+.textoPOPIndividual svg{
+  width: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  height: 100%;
+}
+
+
+.TextCurvIndividual{
+  font-family: 'OleoScript',sans-serif;
+  fill: var(--branco);
+  font-size: 5rem;
+}
+
+.TextCurvIndividual2{
+  font-family: 'Antonio',sans-serif;
+  fill: var(--branco);
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+#curve{
+  fill:transparent;
+}
+.nomeCaneca{
+  font-family: 'OleoScript',sans-serif;
+  color: var(--branco);
+  font-size: 2.5rem;
+  margin-bottom: 30px;
 }
