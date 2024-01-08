@@ -12,6 +12,10 @@
 }
 
 /*CABEÇALHO*/
+  header{
+    display: grid;
+  }
+
  .parte1{
   position: relative;
   width: auto;
@@ -20,6 +24,11 @@
  }
  .parte2{
   position: relative;
+  display: flex;
+
+  width: 100px;
+  height: 50px;
+
   align-items: center;
   justify-content: center;
   place-items: center;
@@ -59,12 +68,11 @@
  .container{
   position: relative;
   height:auto;
-  overflow: visible;
+  overflow: hidden;
  }
  .grid-container{
   position: relative;
   display: grid;
-  z-index: -1;
  }
 .grid-item {
   position: relative;
@@ -87,13 +95,13 @@
 }
 
 /* Alternating background images using nth-child selector */
-.grid-item:nth-child(odd) {
+/*.grid-item:nth-child(odd) {
   background-image: url('PecasArmario/tudoJunto_01.svg');
 }
 
 .grid-item:nth-child(even) {
   background-image: url('PecasArmario/tudoJunto_02.svg');
-}
+}*/
 
 
 .caneca{
@@ -108,6 +116,16 @@
   justify-content: center;
 
   margin-top: auto; 
+
+  z-index: 2;
+
+  transform-origin: 50% 75%;
+  transform: rotate(0deg);
+  filter: saturate(0.75);
+
+  transition-property: filter;
+  transition-duration: 550ms;
+  transition-timing-function: ease-out;  
 }
 
 .caneca img {
@@ -131,6 +149,29 @@
   align-items: end;
 }
 
+.allObj:hover .hoverPiece{
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+  opacity: 1;
+}
+
+.allObj:hover .caneca{
+  animation: infinite  oscilar 2000ms;
+  filter: saturate(1);
+}
+
+.hoverPiece{
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition-property: opacity , width, height;
+  transition-duration: 550ms;
+  transition-timing-function: ease-out;
+}
+
+
 .efeitoPOP {
   display: flex;
 
@@ -146,6 +187,7 @@
   align-items: end;
 
   overflow: hidden;
+
 }
 
 .efeitoPOP img {
@@ -156,6 +198,11 @@
   width: 100%;
   height: 100%;
   margin-bottom: -5%;
+}
+
+.visivel{
+  visibility: visible;
+  opacity: 1;
 }
 
 .textoPOP{
@@ -221,6 +268,8 @@
   top:0;
 
   overflow: hidden;
+
+  pointer-events : none;
 }
 
 .lateralEsq {
@@ -491,7 +540,11 @@ font-size: 1.5rem;
 
 
 
-
+@media (max-width:720px) {
+  .BarrasLaterais{
+    display:none;
+  }
+}
 
 
 /*tablet*/
@@ -1033,3 +1086,42 @@ margin-top: auto;
   background: #ffffff;
 }
 
+@keyframes oscilar{
+  0%{
+    transform: rotate(0deg);
+    transform-origin: 50% 75%;
+  }5%{
+    transform: rotate(-3deg);
+    transform-origin: 50% 75%;
+  }15%{
+    transform: rotate(3deg);
+    transform-origin: 50% 75%;
+  }25%{
+    transform: rotate(-3deg);
+    transform-origin: 50% 75%;
+  }35%{
+    transform: rotate(3deg);
+    transform-origin: 50% 75%;
+  }45%{
+    transform: rotate(-3deg);
+    transform-origin: 50% 75%;
+  }55%{
+    transform: rotate(3deg);
+    transform-origin: 50% 75%;
+  }65%{
+    transform: rotate(-3deg);
+    transform-origin: 50% 75%;
+  }75%{
+    transform: rotate(3deg);
+    transform-origin: 50% 75%;
+  }85%{
+    transform: rotate(-3deg);
+    transform-origin: 50% 75%;
+  }95%{
+    transform: rotate(3deg);
+    transform-origin: 50% 75%;
+  }100%{
+    transform: rotate(0deg);
+    transform-origin: 50% 75%;
+  }
+}
