@@ -668,31 +668,45 @@ background-size: cover;
 background-position: left center;
     background-repeat: no-repeat;
 }
+@media (max-width: 900px) {
+  .menu{
+  width: 100%;
+  }
+  .menumenu{
+    padding: 50px;
+
+  }
+}
 .menumenu{
   overflow: hidden;
   position: relative;
   display: grid;
   width: auto;
-  top: 0;
-  right: 0;
-  height: 100%;
-  align-content: space-evenly;
-  margin: 5%;
-  align-items: center;
-  
+ 
+  height: 90%;
+  padding: 10px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-left: 80px;
+  margin-right: 60px;
+  grid-template-rows: 20% 60% 20%;
+  grid-row-gap: 2%;
 }
 /*Menu Pages*/
 .menuPages{
   position: relative;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 20px;
+
 
   height: auto;
-  width: auto;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+  width: 100%;
+  left: 0;
+
+
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: column;
+    
 }
 .fundomenuPages{
   width: 100%;
@@ -721,11 +735,18 @@ background-position: left center;
 
 .divmenuPages{
   position: absolute;
-  top:0%;
+  display: flex;
+  top: 0%;
   left: 0%;
-  margin-top: 1%;
-  width: 100%;
+ width: 100%;
+ margin-top: auto;
+
+ 
+  height: 100%;
   z-index: 41;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
 .butoesdivmenuPages{
@@ -766,26 +787,30 @@ background-position: left center;
 /*Menu Filtrps*/
 .menuFiltros{
   position: relative;
-  margin-left: 10%;
-  margin-right: 10%;
- 
+
   
   height: auto;
-  width: auto;
+  width: 100%;
     
+
+  flex-direction: column;
+  /*background-image: url('Coisas-Portas/portas/3x/peca2.png');*/
+  background-size: contain;
+  background-position: left center;
+      background-repeat: no-repeat;
 }
-.fundomenuFiltros {
+.fundomenuFiltros{
   width: 100%;
   height: 100%;
   position: relative;
-  top: 0;
+  top:0;
   left: 0%;
   z-index: 40;
 }
 
 .fundomenuFiltros img {
   width: 100%;
-  height: auto; /* Set height to auto to maintain the aspect ratio */
+  height: 100%; /* Set height to auto to maintain the aspect ratio */
 }
 .menuFiltros h1{
   position: relative;
@@ -811,11 +836,16 @@ background-position: left center;
   display: flex;
   top: 0%;
   left: 0%;
-  margin-top: 5%;
-  
-  width: 100%;
+
   z-index: 41;
+  width: 100%;
+  height: 100%;
+  margin-top: auto;
   flex-direction: column;
+  justify-content: center;
+
+
+
 }
 
 .butoesdivmenuFiltros{
@@ -824,11 +854,11 @@ background-position: left center;
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 5%;
+  flex-wrap: wrap;
   
 }
-.butoesdivmenuFiltros button:nth-child(1){
-  background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
-      background-size: contain;
+.butoesdivmenuFiltros button{
+     background-size: contain;
       border: none;
       color: white; /* Set text color to contrast with the background */
       padding: 10px 20px;
@@ -837,33 +867,21 @@ background-position: left center;
       color: #877E71;
       font-family: 'OleoScript',sans-serif;
       font-weight: normal;
-     
+}
+.butoesdivmenuFiltros button:nth-child(1){
+  background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
+    
+  background-size: contain; 
 }
 
 .butoesdivmenuFiltros button:nth-child(2){
   background: url('Coisas-Portas/botoes/botao_02.svg') no-repeat center center; /* Default background */
-      background-size: contain;
-      border: none;
-      color: white; /* Set text color to contrast with the background */
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 2rem;
-      color: #877E71;
-      font-family: 'OleoScript',sans-serif;
-      font-weight: normal;
+  background-size: contain; 
      
 }
 .butoesdivmenuFiltros button:nth-child(3){
   background: url('Coisas-Portas/botoes/botao_03.svg') no-repeat center center; /* Default background */
-      background-size: contain;
-      border: none;
-      color: white; /* Set text color to contrast with the background */
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 2rem;
-      color: #877E71;
-      font-family: 'OleoScript',sans-serif;
-      font-weight: normal;
+  background-size: contain;
      
 }
 
@@ -876,8 +894,6 @@ background-position: left center;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-left: 3%;
-    margin-right: 3%;
 }
 
 .divmenuFiltros2{
@@ -887,74 +903,54 @@ background-position: left center;
   width: 100%;
   z-index: 41;
 }
-
+.butoesdivmenuFiltros2 button{
+  background-size: contain;
+  border: none;
+  color: white; /* Set text color to contrast with the background */
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #877E71;
+  font-family: 'OleoScript',sans-serif;
+  font-weight: normal;
+ 
+}
 
 .butoesdivmenuFiltros2 button:nth-child(1){
-  background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
-      background-size: contain;
-      border: none;
-      color: white; /* Set text color to contrast with the background */
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 2rem;
-      color: #877E71;
-      font-family: 'OleoScript',sans-serif;
-      font-weight: normal;
-     
+  background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */     
+  background-size: contain;
+
+
+ 
 }
 
 .butoesdivmenuFiltros2 button:nth-child(2){
-  background: url('Coisas-Portas/botoes/botao_02.svg') no-repeat center center; /* Default background */
-      background-size: contain;
-      border: none;
-      color: white; /* Set text color to contrast with the background */
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 2rem;
-      color: #877E71;
-      font-family: 'OleoScript',sans-serif;
-      font-weight: normal;
-     
+  background: url('Coisas-Portas/botoes/botao_02.svg') no-repeat center center; /* Default background */    
+  background-size: contain;
+
 }
 .butoesdivmenuFiltros2 button:nth-child(3){
-  background: url('Coisas-Portas/botoes/botao_03.svg') no-repeat center center; /* Default background */
-      background-size: contain;
-      border: none;
-      color: white; /* Set text color to contrast with the background */
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 2rem;
-      color: #877E71;
-      font-family: 'OleoScript',sans-serif;
-      font-weight: normal;
-     
+  background: url('Coisas-Portas/botoes/botao_03.svg') no-repeat center center; /* Default background */  
+  background-size: contain;
 }
 
 .butoesdivmenuFiltros2 button:nth-child(4){
   background: url('Coisas-Portas/botoes/botao_04.svg') no-repeat center center; /* Default background */
-      background-size: contain;
-      border: none;
-      color: white; /* Set text color to contrast with the background */
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 2rem;
-      color: #877E71;
-      font-family: 'OleoScript',sans-serif;
-      font-weight: normal;
-     
+  background-size: contain;
 }
 
 
 /*Menu Filtrps*/
 .menuSearch{
   position: relative;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 20px;
- 
+
   
   height: auto;
-  width: auto;
+  width: 100%;
+flex-direction: column;
+  background-size: contain;
+  background-position: left center;
+      background-repeat: no-repeat;
     
 }
 .fundomenuSearch{
@@ -967,7 +963,7 @@ background-position: left center;
 }
 .fundomenuSearch img{
   width: 100%;
-  height: 60%;
+  height: 100%;
 
 }
 .menuSearch h1{
@@ -984,14 +980,17 @@ background-position: left center;
 .divmenuSearch{
   position: absolute;
   display: flex;
- 
-  left: 0%;
   width: 100%;
+  height: 100%;
+margin-top: auto;
+  left: 0%;
   z-index: 41;
   flex-direction: column;
+  justify-content: center;
 
   top: 0%;
-  margin-top: 3%;
+
+
 }
 
 .search-container {
