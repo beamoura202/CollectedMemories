@@ -12,6 +12,10 @@
 }
 
 /*CABEÇALHO*/
+  header{
+    display: grid;
+  }
+
  .parte1{
   position: relative;
   width: auto;
@@ -20,6 +24,11 @@
  }
  .parte2{
   position: relative;
+  display: flex;
+
+  width: 100px;
+  height: 50px;
+
   align-items: center;
   justify-content: center;
   place-items: center;
@@ -59,7 +68,7 @@
  .container{
   position: relative;
   height:auto;
-  overflow: visible;
+  overflow: hidden;
  }
  .grid-container{
   position: relative;
@@ -531,7 +540,11 @@ font-size: 1.5rem;
 
 
 
-
+@media (max-width:720px) {
+  .BarrasLaterais{
+    display:none;
+  }
+}
 
 
 /*tablet*/
