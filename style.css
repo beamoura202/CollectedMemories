@@ -650,3 +650,337 @@ justify-content: end;
 #curve{
   fill:transparent;
 }
+
+
+
+
+/*Menu*/
+.menu{
+  overflow: hidden;
+  z-index: 40;
+width: 50%;
+height: 100%;
+position: absolute;
+top:0;
+right: 0;
+background-image: url('Coisas-Portas/portas/portaFundo_1.svg');
+background-size: cover;
+background-position: left center;
+    background-repeat: no-repeat;
+}
+.menumenu{
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  width: auto;
+  top: 0;
+  right: 0;
+  height: 100%;
+  align-content: space-evenly;
+  margin: 5%;
+  
+}
+/*Menu Pages*/
+.menuPages{
+  position: relative;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 20px;
+
+  height: auto;
+  width: auto;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.fundomenuPages{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top:0;
+  left: 0%;
+  z-index: 40;
+}
+.fundomenuPages img{
+  width: 100%;
+  height: 100%;
+
+}
+.menuPages h1{
+  position: relative;
+  display: flex;
+  z-index: 43;
+  width: 100%;
+  font-size: 3rem;
+  justify-content: center;
+  color: #877E71;
+  font-family: 'OleoScript',sans-serif;
+  font-weight: normal;
+}
+.divmenuPages{
+  position: absolute;
+  top:0%;
+  left: 0%;
+  margin-top: 1%;
+  width: 100%;
+  z-index: 41;
+}
+
+.butoesdivmenuPages{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.butoesdivmenuPages button:first-child{
+  background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+
+.butoesdivmenuPages button:last-child{
+  background: url('Coisas-Portas/botoes/botao_02.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+
+
+/*Menu Filtrps*/
+.menuFiltros{
+  position: relative;
+  margin-left: 10%;
+  margin-right: 10%;
+ 
+  
+  height: auto;
+  width: auto;
+    
+}
+.fundomenuFiltros {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 0%;
+  z-index: 40;
+}
+
+.fundomenuFiltros img {
+  width: 100%;
+  height: auto; /* Set height to auto to maintain the aspect ratio */
+}
+.menuFiltros h1{
+  position: relative;
+  display: flex;
+  z-index: 43;
+  width: 100%;
+  font-size: 3rem;
+  justify-content: center;
+  color: #877E71;
+  font-family: 'OleoScript',sans-serif;
+  font-weight: normal;
+}
+.divmenuFiltros{
+  position: absolute;
+  display: flex;
+  top: 0%;
+  left: 0%;
+  margin-top: 5%;
+  
+  width: 100%;
+  z-index: 41;
+  flex-direction: column;
+}
+
+.butoesdivmenuFiltros{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 5%;
+  
+}
+.butoesdivmenuFiltros button:nth-child(1){
+  background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+
+.butoesdivmenuFiltros button:nth-child(2){
+  background: url('Coisas-Portas/botoes/botao_02.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+.butoesdivmenuFiltros button:nth-child(3){
+  background: url('Coisas-Portas/botoes/botao_03.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+
+
+
+
+.butoesdivmenuFiltros2{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-left: 3%;
+    margin-right: 3%;
+}
+
+.divmenuFiltros2{
+  position: absolute;
+  top:50%;
+  left: 0%;
+  width: 100%;
+  z-index: 41;
+}
+
+
+.butoesdivmenuFiltros2 button:nth-child(1){
+  background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+
+.butoesdivmenuFiltros2 button:nth-child(2){
+  background: url('Coisas-Portas/botoes/botao_02.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+.butoesdivmenuFiltros2 button:nth-child(3){
+  background: url('Coisas-Portas/botoes/botao_03.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+
+.butoesdivmenuFiltros2 button:nth-child(4){
+  background: url('Coisas-Portas/botoes/botao_04.svg') no-repeat center center; /* Default background */
+      background-size: contain;
+      border: none;
+      color: white; /* Set text color to contrast with the background */
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 2rem;
+      color: #877E71;
+      font-family: 'OleoScript',sans-serif;
+      font-weight: normal;
+     
+}
+
+
+/*Menu Filtrps*/
+.menuSearch{
+  position: relative;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 20px;
+ 
+  
+  height: auto;
+  width: auto;
+    
+}
+.fundomenuSearch{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top:0;
+  left: 0%;
+  z-index: 40;
+}
+.fundomenuSearch img{
+  width: 100%;
+  height: 60%;
+
+}
+.menuSearch h1{
+  position: relative;
+  display: flex;
+  z-index: 43;
+  width: 100%;
+  font-size: 3rem;
+  justify-content: center;
+  color: #877E71;
+  font-family: 'OleoScript',sans-serif;
+  font-weight: normal;
+}
+.divmenuSearch{
+  position: absolute;
+  display: flex;
+ 
+  left: 0%;
+  width: 100%;
+  z-index: 41;
+  flex-direction: column;
+
+  top: 0%;
+  margin-top: 3%;
+}
+
