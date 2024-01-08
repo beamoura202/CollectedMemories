@@ -678,6 +678,7 @@ background-position: left center;
   height: 100%;
   align-content: space-evenly;
   margin: 5%;
+  align-items: center;
   
 }
 /*Menu Pages*/
@@ -717,6 +718,7 @@ background-position: left center;
   font-family: 'OleoScript',sans-serif;
   font-weight: normal;
 }
+
 .divmenuPages{
   position: absolute;
   top:0%;
@@ -795,6 +797,14 @@ background-position: left center;
   color: #877E71;
   font-family: 'OleoScript',sans-serif;
   font-weight: normal;
+}
+.menuFiltros h2{
+  margin-left: 5%;
+  font-size: 1.3rem;
+  color: #877E71;
+  font-family: 'OleoScript',sans-serif;
+  font-weight: normal;
+
 }
 .divmenuFiltros{
   position: absolute;
@@ -982,5 +992,45 @@ background-position: left center;
 
   top: 0%;
   margin-top: 3%;
+}
+
+.search-container {
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 4px;
+  font-size: 16px;
+
+}
+ .search-container {
+  float: right;
+}
+
+.search-container input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  background-color: #877e7100;
+  border: 4px solid #DAD2BC;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #DAD2BC;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background: #ffffff;
 }
 
