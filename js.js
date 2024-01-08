@@ -2,7 +2,9 @@ console.log("fui carregado");
 
 var divGridItem;
 var nItensR = 6;
+var lastNItensR = 0;
 var total = 0;
+var lim = 24;
 
 //arrayBidimensionais
 var itensCarregados = [];
@@ -13,12 +15,35 @@ var itensPerColocar = 0;
 //oragnização Prateleiras
 var dispOriginal = [];
 var dispMostrar = [];
+var dispMostrar1 = [];
 
 var dadosTodos = [];
+var dadosFilter = [];
+var dadosOrdenados = []; 
+
+var hoverObjs = [];
+
+//////PRE_LOAD
+    var imageUrlOdd = '../PecasArmario/tudoJunto_01.svg';
+    var imageUrlEven = '../PecasArmario/tudoJunto_02.svg';
+
+    // Função para carregar as imagens antes de criar as divs
+    function preloadImages() {
+      var imageOdd = new Image();
+      imageOdd.src = imageUrlOdd;
+
+      imageOdd.onload = function () {
+        var imageEven = new Image();
+        imageEven.src = imageUrlEven;
+      };
+    }
+
 
 ///////MAIN EVENTS 
      //QUANDO CARREGADO 
         window.addEventListener("DOMContentLoaded", function () {
+
+            preloadImages();
 
             divGridItem = document.querySelectorAll('.grid-item');
 
@@ -42,10 +67,15 @@ var dadosTodos = [];
                 .then(dadosRetornados => {
                     if (dadosRetornados) {
                           //console.log(dadosRetornados);
-                          allItensCarregados=0;
+                          allItensCarregados=[];
                           
                           total = dadosRetornados.object.metadata.tudo.total;
-                          itensPerColocar = total;
+
+                          if(lim<=total){
+                            itensPerColocar = total; //numero maximo de itens na listagem
+                          }else{
+                            itensPerColocar = lim;
+                          }
 
                           //clone array
                           dadosTodos = [...dadosRetornados.object.metadata.tudo.objects]; 
@@ -54,13 +84,30 @@ var dadosTodos = [];
                           dadosTodos.sort((a, b) => 0.5 - Math.random());
                           console.log(dadosTodos);
 
-                          setArmario();
+                          filter('type','teapot');
+                          reOrder('title','false');
+
+                          setArmario();//set armario com espacoas 
+                          setInArmario();//set data no armario com os espacos
                           displayArmario(nItensR);
 
-                          loadRow(dadosRetornados);
+                          loadRow();
+                         
+                          hoverObjs = document.querySelectorAll('.hoverPiece');
 
-                          let gridItem = document.createElement('div');
-                          gridItem.setAttribute('class','grid-item');                
+                          /*hoverObjs.forEach(ele => {
+                            console.log(ele.className);
+
+                                ele.addEventListener('mouseover',function(){
+                                  console.log('a');
+                                  ele.classList.add('visible');                  
+                                });
+
+                                ele.addEventListener( 'mouseout',function(){
+                                  console.log('b');
+                                  ele.classList.remove('visible');                  
+                                });
+                          });*/
                     }
                 });
         });
@@ -69,12 +116,21 @@ var dadosTodos = [];
         window.addEventListener('resize',function(){
           //Organização de itens pelas prateleiras 
           if(window.innerWidth<=720){
-            displayArmario(3);
-          }else if(window.innerWidth>720){
-            displayArmario(6);
+            nItensR = 2;
+          }else if(window.innerWidth>720 && window.innerWidth<1000){
+            nItensR = 4;
+          }else if(window.innerWidth<1000){
+            nItensR = 6;
           }else{
-            displayArmario(6);
+            nItensR = 6;
           }
+
+          if(nItensR !== lastNItensR){
+            displayArmario(nItensR);
+            loadRow();
+          }
+
+          lastNItensR = nItensR;
         });
 
 
@@ -96,22 +152,43 @@ var dadosTodos = [];
             let aux = '';
             let auxB = '';
             let auxC = '';
-
+          
 
         //CARREGAR IMG 
           img.setAttribute('src', dado.metadata.image.url);
           img.setAttribute('alt', dado.title);
 
-          /*img.onload = function() {
-            loadedImage(i,j);
-          };*/
+          img.onload = function() {
+            //Where loaded 
+            loadedImage(dado.i, this);
+          };
 
           divCaneca.setAttribute('class', 'caneca');
           divCaneca.appendChild(img);
 
         //Carregar Efeito
-            divEfeitoPop.setAttribute('class', 'efeitoPOP');
-            divAllObj.setAttribute('class', 'allObj');
+            divEfeitoPop.setAttribute('class', 'efeitoPOP hoverPiece');
+            divAllObj.className = 'allObj'; 
+            img = document.createElement('img');
+          
+                let src = ' ';
+                let idAt = i * nItensR + j;
+                
+                console.log(idAt);
+                
+                  if(idAt % 2 === 0){
+                    src = '../img/efeito_1.png';
+                  }
+                  if(idAt % 3 === 0){
+                    src = '../img/efeito_2.png';
+                  }
+                  if(src === ' '){
+                    src = '../img/efeito_3.png';
+                  }
+
+            img.src = src;
+
+            divEfeitoPop.appendChild(img);
 
         //CARREGAR SVG
           for(let i=0; i<2; i++){
@@ -140,36 +217,65 @@ var dadosTodos = [];
           return divAllObj;
       }
 
-      function loadRow(dados){
+      function loadRow(){
+        itensCarregados = [];
         let gridContainer = document.querySelector('.grid-container'); 
+        gridContainer.innerHTML = '';
+
         //grid item
         let rows = [];
         let aux2;
 
         for(let i = 0; i<dispMostrar.length; i++){ 
-          rows[i] = document.createElement('div');
-          rows[i].setAttribute('class','grid-item');
+            rows[i] = document.createElement('div');
+            rows[i].setAttribute('class','grid-item');
 
-          for(let j = 0;  j<dispMostrar[i].length; j++){
-           if(dispMostrar[i][j].i!='-'){
-               aux2 = loadItem(dispMostrar[i][j]);
-           }else{
-               aux2 = document.createElement('div');
-               aux2.setAttribute('class','allObj');
-           }
+            if (i % 2 === 0) {
+              rows[i].style.backgroundImage = 'url("' + imageUrlEven + '")';
+            } else {
+              rows[i].style.backgroundImage = 'url("' + imageUrlOdd + '")';
+            }
 
-           rows[i].appendChild(aux2);
-          }
-          gridContainer.appendChild(rows[i]);
+                for(let j = 0;  j<dispMostrar[i].length; j++){
+                    if(dispMostrar[i][j].i!='-'){
+                        aux2 = loadItem(dispMostrar[i][j],i,j);
+                        itensCarregados.push({status:false, idd:dispMostrar[i][j].i, w:0, h:0});
+                    }else{
+                        aux2 = document.createElement('div');
+                        aux2.setAttribute('class','allObj');
+                    }
+                      rows[i].appendChild(aux2);
+                }
+
+                if( i === dispMostrar.length-1 ){
+                  for(let j = 0; j< nItensR - dispMostrar[i].length; j++){
+                    aux2 = document.createElement('div');
+                    aux2.setAttribute('class','allObj');
+                    rows[i].appendChild(aux2);
+                  }
+                }
+            gridContainer.appendChild(rows[i]);
         }
       }
       
-      function loadedImage(i,j){ //i -> numero da row; j-> numero do elemento 
-        //Se o id da imagem igual ao do array de carregamento 
-                itensCarregados[i][j].status=true;
-                //precorre os elementos
+      function loadedImage(id,callback){ //id-> id da peca
+                //Se o id da imagem igual ao do array de carregamento
+                //Load por id para que depois de ordenar as pecas as pecas se mantenham com o status certo  
+                  let item = itensCarregados.find((ele) => ele.idd === id);
+                    //console.log(item);
+                    item.status = true;
+
+                //Obter a imagem de origem ja carregada para obter o comprimento e largura
+                  var imagem = new Image();
+                  let image = dadosTodos.find((ele)=> ele.i === id)
+                  imagem.src = image.metadata.image.url;
+                  console.log(imagem.width , imagem.height);
+                
+                  item.w = imagem.width;
+                  item.h = imagem.height;
+
+                //Verifcar se todas as imagens estão carregadas
                 checkAllLoaded();
-                //allItensCarregados[i]++;
       }
 
       function setArmario(){
@@ -184,10 +290,10 @@ var dadosTodos = [];
                 if(itensPerColocar === 0){
                   break; 
                 }else if(getRandomInt(10)>=9){
-                  dispOriginal.push({i:'-'});
+                  dispOriginal.push('-');
                   esp++;
                 }else{
-                  dispOriginal.push(dadosTodos[cont]);
+                  dispOriginal.push('0');
                   itensPerColocar--;
                   cont++;
                 }
@@ -201,15 +307,66 @@ var dadosTodos = [];
             console.log(esp);
       }
 
+      function setInArmario(){
+        let arrayAux = [];
+        let nCenas = lim;
+
+        let calc = 0;
+
+        let o = 0;
+
+        while(o < dadosOrdenados.length){
+          if(dispOriginal[calc] === '0'){
+            o++;
+          }
+          calc++;
+        }
+
+        console.log(calc);
+        
+          nCenas = calc;
+
+        o = 0;
+        
+        for(let a = 0; a<nCenas; a++ ){
+            if(dispOriginal[a] === '-'){
+              arrayAux.push({i:'-'});
+
+            }else if(dispOriginal[a] === '0'){
+              arrayAux.push(dadosOrdenados[o]);
+              o++;
+            }
+        }
+
+        console.log(arrayAux);
+        dispMostrar1 = arrayAux;
+      }
+
 
 
       function displayArmario(nI){
         dispMostrar=[];
 
-        for (var i = 0; i < dispOriginal.length; i += nI) {
-          dispMostrar.push(dispOriginal.slice(i, i + nI));
+        for (var i = 0; i < dispMostrar1.length; i += nI) {
+          dispMostrar.push(dispMostrar1.slice(i, i + nI));
         }
         console.log(dispMostrar);
+      }
+
+
+      function setData(){
+        displayArrayMario = [];
+        dispMostrar1 = []
+
+            for(let i = 0; i = dispOriginal.length; i++){
+                if(dispOriginal[i].i = '-'){
+                  displayArrayMario.push(dispOriginal[i]); 
+                }else{
+                  displayArrayMario.push(dadosOrdenados[i]);
+                }
+            }
+
+        dispMostrar1 = [...displayArrayMario];
       }
 
 
@@ -218,7 +375,7 @@ var dadosTodos = [];
 
       }
 
-      function checkAllLoaded(){
+      /*function checkAllLoaded(){
         let loaded = true;
 
         //precorre todo o array se encontrar um elemento false acaba e devolve false
@@ -236,10 +393,134 @@ var dadosTodos = [];
         }
         
         allItensCarregados = loaded;
+      }*/
+
+      function checkAllLoaded(){
+        let loaded = true;
+
+        console.log(itensCarregados); 
+
+        //precorre todo o array se encontrar um elemento false acaba e devolve false
+        for (var i = 0; i < itensCarregados.length; i++) {
+              if(!itensCarregados[i].status){
+                  loaded = false;
+                  break;
+              }
+        }
+        
+        
+        allItensCarregados = loaded;
+
+        console.log(allItensCarregados);
       }
 
+      //ORDER AND FILTER ///////////////////////////////////////////////////////////////////////////////////////////////
+          //ORDER
+          function reOrder(orderElement, order){ //ELEMENTO A ORDENAR-> decade;title;type /ORDENAÇÂO->false;true ASC;DESC
+            let arrayOrder = [];
+            //ORDER /ORDER BY ID NAME KINGDOM 
 
-      ///OUTRAS 
+            //TODO: ALterar o array dataFilt para dadosTodos
+  
+                  if(dadosTodos!=null && dadosTodos.length>0){
+                    if(orderElement!=undefined && order!=undefined && order!=null && orderElement!=null){
+
+                          console.log(orderElement, order);
+
+                          if(orderElement === 'decade'){ //ORDENAR 
+                            if(order === 'false'){ //ASC
+                              //Copiar o array e atribuição
+                              arrayOrder = [...dadosFilter].sort((a, b) => a.decade - b.decade);
+                            }else if(order === 'true'){ //DESC
+                              //Copiar o array e atribuição
+                              arrayOrder = [...dadosFilter].sort((a, b) => b.decade - a.decade);
+                            }
+              
+                          }else if(orderElement == 'title'){ //ORDENAR TITLE
+                            if(order === 'true'){ //ASC
+                              //Copiar o array e atribuição
+                              arrayOrder = [...dadosFilter].sort((a, b) =>
+                                a.title > b.title ? 1 : -1,
+                              );
+                            }else if(order === 'false'){ //DESC
+                              //Copiar o array e atribuição
+                              arrayOrder = [...dadosFilter].sort((a, b) =>
+                              a.title > b.title ? -1 : 1,
+                            );
+                            }
+              
+                          }else if(orderElement === 'type'){ //ORDENAR TYPE
+                            if(order === 'true'){ //ASC
+                              console.log('aaaab');
+                              //Copiar o array e atribuição
+                              arrayOrder = [...dadosFilter].sort((a, b) =>
+                                a.type > b.type ? 1 : -1,
+                              );
+                            }else if(order === 'false'){ //DESC
+                              //Copiar o array e atribuição
+                              arrayOrder = [...dadosFilter].sort((a, b) =>
+                              a.type > b.type ? -1 : 1,
+                            );
+                            }
+                          }else{
+                             arrayOrder = [...dadosFilter];
+                          }
+
+
+                          dadosOrdenados=[...arrayOrder];
+
+                          console.log(dadosOrdenados);
+
+                        }else{
+                          console.error('orderElement or order with null or undifined values ://');
+                        }
+
+                }else{
+                  console.error('Data not loaded prop. :/');
+                }
+              }
+
+
+          //FILTER 
+          function filter(filterBy,value){
+            if(dadosTodos!=null && dadosTodos.length>0){
+              if(filterBy!='' && filterBy!=null && filterBy!=undefined){
+
+                //Verificação de segundo nivel para o caso de alteração de valores no html
+                let filter = filterBy.toLowerCase();
+                let valueB = value.toLowerCase();
+                let dataFiltrada = [];
+
+                //FILTER TYPE
+                    if(filter === 'type'){//alterar para um array e um find 
+                      dataFiltrada = [...dadosTodos].filter( dado => dado.subtitle.toLowerCase() === valueB);
+
+                //FILTER DECADE
+                    }else if(filter === 'decade'){ //alterar para um array e um find 
+                      dataFiltrada = [...dadosTodos].filter( dado => dado.decade.toLowerCase() === valueB);
+
+                //NO FILTER
+                    }else{
+                      dataFiltrada = [...dadosTodos];
+                      console.error('NOT URGENT: unrec filter'); 
+                    }
+
+                    dadosFilter = dataFiltrada;
+                    console.log(dadosFilter);
+
+              }else{
+                console.error('empty filterBy or null value ://');
+              }
+
+              console.log();
+
+            }else{
+              console.error('Data not loaded prop. :/');
+            }
+          }
+
+
+      ///OUTRAS  ///////////////////////////////////////////////////////////////////////////////////////////
       function getRandomInt(max) {
         return Math.floor(Math.random() * max);
       }
