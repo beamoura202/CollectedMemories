@@ -60,7 +60,6 @@ var hoverObjs = [];
                     });
             }
             
-            // Exemplo de uso:
             const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects/65987df4723ffd2d238b5d07?read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
             
             buscarDadosDaAPI(urlDaAPI)
