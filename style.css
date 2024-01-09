@@ -70,8 +70,9 @@
 .headerMenu{
   width: 100%;
   height: 10%;
-  position: absolute;
+  position: relative;
   text-align: center;
+  z-index: 40;
 }
 /*LISTAGEM DE ARTIGOS*/
  .container{
