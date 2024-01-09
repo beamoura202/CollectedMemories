@@ -58,6 +58,13 @@ var hoverObjs = [];
              botoesPage = document.querySelectorAll('.butoesdivmenuPages>button');
               console.log(botoesPage);
 
+              botoesPage.forEach((bt)=>{bt.addEventListener('click',function(){
+                    var urlAtual = window.location.href;
+                    var novoUrl = urlAtual.replace("index.html", bt.value);
+                    window.location.href = novoUrl;
+                }
+            )});
+
              botoesType = document.querySelectorAll('.butoesdivmenuFiltros>button');
               console.log(botoesType);
               botoesType.forEach((bt)=>{bt.addEventListener('click',function(){
@@ -558,7 +565,7 @@ var hoverObjs = [];
       function redirectPg(id){
           var urlAtual = window.location.href;
           var novoUrl = urlAtual.replace("index.html", "PaginaCanecaBase.html");
-          window.location.href = novoUrl + "?i=" + id;;
+          window.location.href = novoUrl + "?i=" + id;
       }
 
       function updateRows(){
