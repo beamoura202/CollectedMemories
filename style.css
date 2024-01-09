@@ -550,6 +550,12 @@ font-size: 1.5rem;
 
 }
 
+@media (max-width:1000px){
+  .grid-item {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}
+
 @media (max-width:720px) {
   .BarrasLaterais{
     display:none;

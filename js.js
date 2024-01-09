@@ -21,6 +21,13 @@ var dadosTodos = [];
 var dadosFilter = [];
 var dadosOrdenados = []; 
 
+//Botoes
+var botoesType = [];
+var botoesDecade = [];
+var botoesPage = [];
+
+var pagesUrl = [];
+
 var hoverObjs = [];
 
 //////PRE_LOAD
@@ -47,6 +54,46 @@ var hoverObjs = [];
 
             divGridItem = document.querySelectorAll('.grid-item');
 
+            //LOAD BOTOES
+             botoesPage = document.querySelectorAll('.butoesdivmenuPages>button');
+              console.log(botoesPage);
+
+              botoesPage.forEach((bt)=>{bt.addEventListener('click',function(){
+                    var urlAtual = window.location.href;
+                    var novoUrl = urlAtual.replace("index.html", bt.value);
+                    window.location.href = novoUrl;
+                }
+            )});
+
+             botoesType = document.querySelectorAll('.butoesdivmenuFiltros>button');
+              console.log(botoesType);
+              botoesType.forEach((bt)=>{bt.addEventListener('click',function(){
+                    console.log(bt.value);
+                    filter('type',bt.value);
+                    reOrder('title','false');
+                    setInArmario();//set data no armario com os espacos
+                    displayArmario(nItensR);
+                    updateRows();
+                    loadRow();
+                  }
+              )});
+
+             botoesDecade = document.querySelectorAll('.butoesdivmenuFiltros2>button');
+               console.log(botoesDecade);
+               botoesDecade.forEach((bt)=>{bt.addEventListener('click',function(){
+                
+                filter('decade',bt.value);
+                reOrder('title','false');
+                setInArmario();//set data no armario com os espacos
+                displayArmario(nItensR);
+                updateRows();
+                loadRow();
+
+                console.log(bt.value);
+              
+              
+              })});
+
             function buscarDadosDaAPI(url) {  
                 return fetch(url)
                     .then(response => {
@@ -60,7 +107,6 @@ var hoverObjs = [];
                     });
             }
             
-            // Exemplo de uso:
             const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects/65987df4723ffd2d238b5d07?read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
             
             buscarDadosDaAPI(urlDaAPI)
@@ -91,6 +137,7 @@ var hoverObjs = [];
                           setInArmario();//set data no armario com os espacos
                           displayArmario(nItensR);
 
+                          updateRows();
                           loadRow();
                          
                           hoverObjs = document.querySelectorAll('.hoverPiece');
@@ -115,22 +162,7 @@ var hoverObjs = [];
     //QUANDO A JANELA REDIMENSIONADA
         window.addEventListener('resize',function(){
           //Organização de itens pelas prateleiras 
-          if(window.innerWidth<=720){
-            nItensR = 2;
-          }else if(window.innerWidth>720 && window.innerWidth<1000){
-            nItensR = 4;
-          }else if(window.innerWidth<1000){
-            nItensR = 6;
-          }else{
-            nItensR = 6;
-          }
-
-          if(nItensR !== lastNItensR){
-            displayArmario(nItensR);
-            loadRow();
-          }
-
-          lastNItensR = nItensR;
+          updateRows();
         });
 
 
@@ -533,5 +565,24 @@ var hoverObjs = [];
       function redirectPg(id){
           var urlAtual = window.location.href;
           var novoUrl = urlAtual.replace("index.html", "PaginaCanecaBase.html");
-          window.location.href = novoUrl + "?i=" + id;;
+          window.location.href = novoUrl + "?i=" + id;
+      }
+
+      function updateRows(){
+        if(window.innerWidth<=720){
+          nItensR = 2;
+        }else if(window.innerWidth>720 && window.innerWidth<1000){
+          nItensR = 4;
+        }else if(window.innerWidth<1000){
+          nItensR = 6;
+        }else{
+          nItensR = 6;
+        }
+
+        if(nItensR !== lastNItensR){
+          displayArmario(nItensR);
+          loadRow();
+        }
+
+        lastNItensR = nItensR;
       }
