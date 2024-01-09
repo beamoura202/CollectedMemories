@@ -168,6 +168,11 @@ var hoverObjs = [];
 
         //Carregar Efeito
             divEfeitoPop.setAttribute('class', 'efeitoPOP hoverPiece');
+            divAllObj.onclick = function(){
+              redirectPg(dado.i);
+            }    
+
+
             divAllObj.className = 'allObj'; 
             img = document.createElement('img');
           
@@ -523,4 +528,10 @@ var hoverObjs = [];
       ///OUTRAS  ///////////////////////////////////////////////////////////////////////////////////////////
       function getRandomInt(max) {
         return Math.floor(Math.random() * max);
+      }
+
+      function redirectPg(id){
+          var urlAtual = window.location.href;
+          var novoUrl = urlAtual.replace("index.html", "PaginaCanecaBase.html");
+          window.location.href = novoUrl + "?i=" + id;;
       }
