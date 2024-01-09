@@ -53,9 +53,13 @@
   height: auto;
  }
 #botaoMenu{
-  text-align: center;
+  width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
 }
 #botaoMenu svg {
+  z-index: 1000;
   left: 50%;
   width: 4%;
   height: auto;
@@ -63,7 +67,12 @@
   position: absolute;
     
  }
-
+.headerMenu{
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  text-align: center;
+}
 /*LISTAGEM DE ARTIGOS*/
  .container{
   position: relative;
@@ -720,6 +729,10 @@ background-image: url('Coisas-Portas/portas/portaFundo_1.svg');
 background-size: cover;
 background-position: left center;
     background-repeat: no-repeat;
+    display: none;
+
+
+    
 }
 @media (max-width: 900px) {
   .menu{
