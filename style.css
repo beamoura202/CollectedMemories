@@ -77,7 +77,6 @@
  .container{
   position: relative;
   height:auto;
-  overflow: hidden;
  }
 
  .grid-container{
@@ -550,9 +549,6 @@ font-size: 1.5rem;
 
 }
 
-
-
-
 @media (max-width:720px) {
   .BarrasLaterais{
     display:none;
@@ -564,7 +560,6 @@ font-size: 1.5rem;
     padding-right: 20px;
   }
 }
-
 
 /*tablet*/
 @media (max-width: 900px) {
