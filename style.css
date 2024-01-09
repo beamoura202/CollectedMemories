@@ -747,10 +747,22 @@ background-position: left center;
 @media (max-width: 900px) {
   .menu{
   width: 100%;
+  background-position: center;
   }
   .menumenu{
-    padding: 50px;
-
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    width: auto;
+   
+    height: 90%;
+    padding: 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-left: 10%;
+    margin-right:10%;
+    grid-template-rows: 20% 60% 20%;
+    grid-row-gap: 2%;
   }
 
 
@@ -845,22 +857,23 @@ background-position: left center;
     background-color: #877e7100;
     border: 4px solid #DAD2BC;
   }
+  .menumenu{
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    width: auto;
+   
+    height: 90%;
+    padding: 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-left: 80px;
+    margin-right: 60px;
+    grid-template-rows: 20% 60% 20%;
+    grid-row-gap: 2%;
+  }
 }
-.menumenu{
-  overflow: hidden;
-  position: relative;
-  display: grid;
-  width: auto;
- 
-  height: 90%;
-  padding: 10px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-left: 80px;
-  margin-right: 60px;
-  grid-template-rows: 20% 60% 20%;
-  grid-row-gap: 2%;
-}
+
 /*Menu Pages*/
 .menuPages{
   position: relative;
