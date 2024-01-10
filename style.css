@@ -45,31 +45,17 @@
  #efeitoDoMenu {
   text-align: center;
  }
- #efeitoDoMenu svg {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 15%;
-  height: auto;
- }
+ 
 #botaoMenu{
   width: 100%;
     height: 100%;
     position: absolute;
     text-align: center;
 }
-#botaoMenu svg {
-  z-index: 1000;
-  left: 50%;
-  width: 4%;
-  height: auto;
-  transform: translate(-50%,0%);
-  position: absolute;
-    
- }
+
 .headerMenu{
   width: 100%;
-  height: 10%;
+  height: auto;
   position: relative;
   text-align: center;
   z-index: 40;
@@ -658,8 +644,41 @@ font-size: 1.5rem;
     grid-template-columns: 25% 25% 25% 25%;
   }
 }
-
+@media (min-width:720px) {
+  #efeitoDoMenu svg {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 15%;
+    height: auto;
+   }
+   #botaoMenu svg {
+    z-index: 1000;
+    left: 50%;
+    width: 4%;
+    height: auto;
+    transform: translate(-50%,0%);
+    position: absolute;
+      
+   }
+}
 @media (max-width:720px) {
+  .headerMenu{
+    position: absolute;
+    top:0;
+    width: 100%;
+    height: auto;
+  }
+  .parte2{
+    width: 100%;
+  }
+  #efeitoDoMenu svg {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 50%;
+    height: auto;
+   }
   .BarrasLaterais{
     display:none;
   }
@@ -669,6 +688,15 @@ font-size: 1.5rem;
     padding-left: 20px;
     padding-right: 20px;
   }
+  #botaoMenu svg {
+    z-index: 1000;
+    left: 50%;
+    width: 10%;
+    height: auto;
+    transform: translate(-50%,0%);
+    position: absolute;
+      
+   }
 }
 
 /*tablet*/
