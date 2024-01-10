@@ -1,32 +1,33 @@
 window.addEventListener("DOMContentLoaded", function () {
-    function toggleMenu() {
-        console.log('Toggle menu function called');
-        var menu = document.querySelector('.menu');
-        
-        if (menu) {
-            var currentDisplay = window.getComputedStyle(menu).getPropertyValue('display');
-            menu.style.display = (currentDisplay === 'none') ? 'block' : 'none';
-        } else {
-            console.log('Menu element not found');
-        }
+    var menu = document.querySelector('.menu');
+    if (!menu) {
+        console.log('Menu element not found');
+        return;
     }
 
-    var svgContainer = document.getElementById('svg1');
-    
-    if (svgContainer) {
-        svgContainer.addEventListener('click', toggleMenu);
-    } else {
-        console.log('SVG container not found');
+    // Function to show the menu
+    function showMenu() {
+        console.log('Showing menu');
+        menu.style.display = 'block';
     }
 
-    // Trigger a click on the div with ID "botaoMenu"
+    // Function to hide the menu
+    function hideMenu() {
+        console.log('Hiding menu');
+        menu.style.display = 'none';
+    }
+
     var botaoMenu = document.getElementById('botaoMenu');
-    
     if (botaoMenu) {
-        botaoMenu.addEventListener('click', toggleMenu); // Optional: This line adds the click event directly to the div
-        // Uncomment the line below to trigger a click programmatically
-        // botaoMenu.click();
+        botaoMenu.addEventListener('click', showMenu);
     } else {
         console.log('Div with ID "botaoMenu" not found');
+    }
+
+    var botaoX = document.querySelector('.botaoX');
+    if (botaoX) {
+        botaoX.addEventListener('click', hideMenu);
+    } else {
+        console.log('Div with ID "botaoX" not found');
     }
 });
