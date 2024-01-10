@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", function () {
     var menu = document.querySelector('.menu');
+    var body = document.querySelector('body');
     if (!menu) {
         console.log('Menu element not found');
         return;
@@ -9,12 +10,14 @@ window.addEventListener("DOMContentLoaded", function () {
     function showMenu() {
         console.log('Showing menu');
         menu.style.display = 'block';
+        body.style.overflow = 'hidden';
     }
 
     // Function to hide the menu
     function hideMenu() {
         console.log('Hiding menu');
         menu.style.display = 'none';
+        body.style.overflow = 'scroll';
     }
 
     var botaoMenu = document.getElementById('botaoMenu');
