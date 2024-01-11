@@ -56,10 +56,10 @@ function changeContent(dado){
     let img = document.querySelector('.fundopreto>img');
     let title = document.querySelector('.text_path');
     
-    console.log(dado);
+    console.log(title);
     
     h2.innerText = dado.subtitle;
-    title.innerText = dado.title;
+    title.innerHTML = dado.title;
 
     p.innerText = dado.metadata.description;
     img.src = dado.metadata.image.url;
