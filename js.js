@@ -107,7 +107,7 @@ var hoverObjs = [];
                     });
             }
             
-            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects/65987df4723ffd2d238b5d07?read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
+            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects/65a016b4aa609f4b521b3d86?read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
             
             buscarDadosDaAPI(urlDaAPI)
                 .then(dadosRetornados => {
@@ -115,7 +115,8 @@ var hoverObjs = [];
                           //console.log(dadosRetornados);
                           allItensCarregados=[];
                           
-                          total = dadosRetornados.object.metadata.tudo.total;
+                          total = Object.keys(dadosRetornados.object.metadata).length;
+
 
                           if(lim<=total){
                             itensPerColocar = total; //numero maximo de itens na listagem
@@ -123,8 +124,12 @@ var hoverObjs = [];
                             itensPerColocar = lim;
                           }
 
+                          //colocar ids em objetos para fazer a correspondecia com as imagens
+                          
+                          let Dtotal = Object.entries(setDadosStrucutur(dadosRetornados.object.metadata)).map(([key, value]) => ({ key, value }));
+
                           //clone array
-                          dadosTodos = [...dadosRetornados.object.metadata.tudo.objects]; 
+                          dadosTodos = [...Dtotal]; 
                           console.log(dadosRetornados);
 
                           dadosTodos.sort((a, b) => 0.5 - Math.random());
@@ -187,12 +192,12 @@ var hoverObjs = [];
           
 
         //CARREGAR IMG 
-          img.setAttribute('src', dado.metadata.image.url);
+          img.setAttribute('src', dado.value.image.url);
           img.setAttribute('alt', dado.title);
 
           img.onload = function() {
             //Where loaded 
-            loadedImage(dado.i, this);
+            loadedImage(dado.value.i, this);
           };
 
           divCaneca.setAttribute('class', 'caneca');
@@ -201,7 +206,7 @@ var hoverObjs = [];
         //Carregar Efeito
             divEfeitoPop.setAttribute('class', 'efeitoPOP hoverPiece');
             divAllObj.onclick = function(){
-              redirectPg(dado.i);
+              redirectPg(dado.value.i);
             }    
 
 
@@ -235,11 +240,11 @@ var hoverObjs = [];
                 if(i==0){
                     aux = '0 0 260 225';
                     auxB = 'TextCurv';
-                    auxC = dado.title;
+                    auxC = dado.value.title;
                 }else{
                     aux = '0 0 260 200';
                     auxB = 'TextCurv2';
-                    auxC = dado.subtitle;
+                    auxC = dado.value.subtitle;
                 }
             
             svg = svgT[0] + aux + svgT[1] + auxB + svgT[2] + auxC + svgT[3];
@@ -276,7 +281,7 @@ var hoverObjs = [];
                 for(let j = 0;  j<dispMostrar[i].length; j++){
                     if(dispMostrar[i][j].i!='-'){
                         aux2 = loadItem(dispMostrar[i][j],i,j);
-                        itensCarregados.push({status:false, idd:dispMostrar[i][j].i, w:0, h:0});
+                        itensCarregados.push({status:false, idd:dispMostrar[i][j].value.i, w:0, h:0});
                     }else{
                         aux2 = document.createElement('div');
                         aux2.setAttribute('class','allObj');
@@ -304,8 +309,9 @@ var hoverObjs = [];
 
                 //Obter a imagem de origem ja carregada para obter o comprimento e largura
                   var imagem = new Image();
-                  let image = dadosTodos.find((ele)=> ele.i === id)
-                  imagem.src = image.metadata.image.url;
+                  let image = dadosTodos.find((ele)=> ele.value.i === id);
+                  console.log(image);
+                  imagem.src = image.value.image.url;
                   console.log(imagem.width , imagem.height);
                 
                   item.w = imagem.width;
@@ -467,22 +473,22 @@ var hoverObjs = [];
                           if(orderElement === 'decade'){ //ORDENAR 
                             if(order === 'false'){ //ASC
                               //Copiar o array e atribuição
-                              arrayOrder = [...dadosFilter].sort((a, b) => a.decade - b.decade);
+                              arrayOrder = [...dadosFilter].sort((a, b) => a.value.decade - b.value.decade);
                             }else if(order === 'true'){ //DESC
                               //Copiar o array e atribuição
-                              arrayOrder = [...dadosFilter].sort((a, b) => b.decade - a.decade);
+                              arrayOrder = [...dadosFilter].sort((a, b) => b.value.decade - a.value.decade);
                             }
               
                           }else if(orderElement == 'title'){ //ORDENAR TITLE
                             if(order === 'true'){ //ASC
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                                a.title > b.title ? 1 : -1,
+                                a.value.title > b.value.title ? 1 : -1,
                               );
                             }else if(order === 'false'){ //DESC
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                              a.title > b.title ? -1 : 1,
+                              a.value.title > b.value.title ? -1 : 1,
                             );
                             }
               
@@ -491,12 +497,12 @@ var hoverObjs = [];
                               console.log('aaaab');
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                                a.type > b.type ? 1 : -1,
+                                a.value.type > b.value.type ? 1 : -1,
                               );
                             }else if(order === 'false'){ //DESC
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                              a.type > b.type ? -1 : 1,
+                              a.value.type > b.value.type ? -1 : 1,
                             );
                             }
                           }else{
@@ -530,11 +536,11 @@ var hoverObjs = [];
 
                 //FILTER TYPE
                     if(filter === 'type'){//alterar para um array e um find 
-                      dataFiltrada = [...dadosTodos].filter( dado => dado.subtitle.toLowerCase() === valueB);
+                      dataFiltrada = [...dadosTodos].filter( dado => dado.value.subtitle.toLowerCase() === valueB);
 
                 //FILTER DECADE
                     }else if(filter === 'decade'){ //alterar para um array e um find 
-                      dataFiltrada = [...dadosTodos].filter( dado => dado.decade.toLowerCase() === valueB);
+                      dataFiltrada = [...dadosTodos].filter( dado => dado.value.decade.toLowerCase() === valueB);
 
                 //NO FILTER
                     }else{
@@ -555,6 +561,20 @@ var hoverObjs = [];
               console.error('Data not loaded prop. :/');
             }
           }
+
+      function setDadosStrucutur(dadosExt){
+        const chaves = Object.keys(dadosExt);
+        let aux = dadosExt;
+
+        console.log(chaves.length);
+         
+        for(let a = 0; a<chaves.length; a++){
+          aux[chaves[a]].i=a;
+          console.log(aux[chaves[a]].i);
+        }
+
+        return aux;
+      }    
 
 
       ///OUTRAS  ///////////////////////////////////////////////////////////////////////////////////////////
