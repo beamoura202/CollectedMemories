@@ -6,6 +6,10 @@ var lastNItensR = 0;
 var total = 0;
 var lim = 24;
 
+//
+var rowsCarregadas = [];
+
+
 //arrayBidimensionais
 var itensCarregados = [];
 var allItensCarregados = [];
@@ -25,6 +29,7 @@ var dadosOrdenados = [];
 var botoesType = [];
 var botoesDecade = [];
 var botoesPage = [];
+var searchBar;
 
 var pagesUrl = [];
 
@@ -51,6 +56,16 @@ var hoverObjs = [];
         window.addEventListener("DOMContentLoaded", function () {
 
             preloadImages();
+
+            searchBar = document.querySelector('#searchInput');
+            searchBar.addEventListener('input', (e)=>{
+               filter('search',e.target.value);
+               reOrder('title','false');
+               setInArmario();//set data no armario com os espacos
+               displayArmario(nItensR);
+               updateRows();
+               loadRow();
+            });
 
             divGridItem = document.querySelectorAll('.grid-item');
 
@@ -267,8 +282,13 @@ var hoverObjs = [];
         //grid item
         let rows = [];
         let aux2;
+        let allMedidas=0;
+        //string 
+        let medidas;
 
         for(let i = 0; i<dispMostrar.length; i++){ 
+            allMedidas=0;
+
             rows[i] = document.createElement('div');
             rows[i].setAttribute('class','grid-item');
 
@@ -282,9 +302,13 @@ var hoverObjs = [];
                     if(dispMostrar[i][j].i!='-'){
                         aux2 = loadItem(dispMostrar[i][j],i,j);
                         itensCarregados.push({status:false, idd:dispMostrar[i][j].value.i, w:0, h:0});
+
+                        //allMedidas+=verifyMedidas(dispMostrar[i][j].value.type);
+
                     }else{
                         aux2 = document.createElement('div');
                         aux2.setAttribute('class','allObj');
+
                     }
                       rows[i].appendChild(aux2);
                 }
@@ -296,6 +320,9 @@ var hoverObjs = [];
                     rows[i].appendChild(aux2);
                   }
                 }
+
+                rows[i].style.gridTemplateColumns = 
+
             gridContainer.appendChild(rows[i]);
         }
       }
@@ -310,6 +337,7 @@ var hoverObjs = [];
                 //Obter a imagem de origem ja carregada para obter o comprimento e largura
                   var imagem = new Image();
                   let image = dadosTodos.find((ele)=> ele.value.i === id);
+
                   console.log(image);
                   imagem.src = image.value.image.url;
                   console.log(imagem.width , imagem.height);
@@ -388,12 +416,17 @@ var hoverObjs = [];
 
 
       function displayArmario(nI){
-        dispMostrar=[];
+        dispMostrar = [];
+        rowsCarregadas = [];
 
         for (var i = 0; i < dispMostrar1.length; i += nI) {
           dispMostrar.push(dispMostrar1.slice(i, i + nI));
         }
-        console.log(dispMostrar);
+        
+        //colunas carregadas para o display de está a ser carregado e para ajuste de dimensão dos artigos
+        for(var i = 0; i <dispMostrar.length; i++){
+          rowsCarregadas.push(false);
+        }
       }
 
 
@@ -421,26 +454,6 @@ var hoverObjs = [];
       /*function checkAllLoaded(){
         let loaded = true;
 
-        //precorre todo o array se encontrar um elemento false acaba e devolve false
-        for (var i = 0; i < itensCarregados.length; i++) {
-          if(loaded){
-              for (var j = 0; j < itensCarregados[i].length; j++) {
-                  if(!itensCarregados[i][j].status){
-                      loaded = false; 
-                      break;
-                  }
-              }
-          }else{
-            break;
-          }
-        }
-        
-        allItensCarregados = loaded;
-      }*/
-
-      function checkAllLoaded(){
-        let loaded = true;
-
         console.log(itensCarregados); 
 
         //precorre todo o array se encontrar um elemento false acaba e devolve false
@@ -455,6 +468,73 @@ var hoverObjs = [];
         allItensCarregados = loaded;
 
         console.log(allItensCarregados);
+      }*/
+
+      function checkAllLoaded(){
+        let loaded = true;
+
+        console.log(itensCarregados); 
+        console.log(dispMostrar);
+
+        //precorre todo o array se encontrar um elemento false acaba e devolve false
+        for (var i = 0; i <dispMostrar.length; i++) {
+          loaded = true;  
+          
+          for(var j=0; j <dispMostrar[i].length; j++){
+              //verifica que nao é um espaco em branco    
+              if(dispMostrar[i][j].i!='-'){
+                      let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].value.i);
+                         if(!aux.status){
+                            loaded=false;    
+                            break;
+                         } 
+                 }
+          }
+          rowsCarregadas[i] = loaded;
+        }
+
+        //setRowDimesions();
+        
+      }
+
+
+      //elementos das rows sao carregados depois de ser dado o display nas colunas
+      //colucar as devidas dimensoes aos elementos de uma row
+      function setRowDimesions (){
+            let arrayPerce = []; 
+            let mediJuntas = 0;
+
+         for(let i=0; i<rowsCarregadas.length; i++){
+            arrayPerce = [];
+            mediJuntas = 0;
+            if(rowsCarregadas[i]){
+              //get medidas Juntas
+              for(let j = 0; j<dispMostrar[i].length; j++){
+                if(dispMostrar[i][j].i!='-'){
+                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].value.i);
+                  mediJuntas+=aux.w; 
+                }else{
+                  mediJuntas+=250;
+                }
+              }
+
+              console.log(mediJuntas);
+
+              for(let j = 0; j<dispMostrar[i].length; j++){
+                if(dispMostrar[i][j].i!='-'){
+                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].value.i);
+                  arrayPerce.push((aux.w*100)/mediJuntas);
+                }else{
+                  arrayPerce.push((250*100)/mediJuntas);
+                }
+              }
+
+              console.log(arrayPerce);
+
+              //get Percentagens
+
+            }
+         }
       }
 
       //ORDER AND FILTER ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -546,6 +626,11 @@ var hoverObjs = [];
                     }else{
                       dataFiltrada = [...dadosTodos];
                       console.error('NOT URGENT: unrec filter'); 
+                    }
+
+                    if(filter === 'search'){
+                        const padrao = new RegExp(valueB, 'i');
+                        dataFiltrada = [...dadosTodos].filter(dado => padrao.test(dado.value.title.toLowerCase()));
                     }
 
                     dadosFilter = dataFiltrada;
