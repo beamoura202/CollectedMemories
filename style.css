@@ -1621,9 +1621,21 @@ svg{
     position: relative;
     width: 40vw;
   }
+  .footerInfo svg{
+    display: none;
+  }
+  .footerInfo{
+    display: block;
+    height: 100px;
+    width: 100%;
+  }
+  .footerSuport{
+    margin-top: 10px;
+    margin-left: 0;
+  }
 
     .footerInfoTexto{
-    
+    background-color: #dad2bc;
       width: 90%;
       height: 100%;
       /* padding: 3%; */
@@ -1631,10 +1643,12 @@ svg{
       padding-right: 10vw;
       flex-direction: row;
       
+      
       align-items: center;
     }
     .footerInfoTexto2{
       font-size: 0.8rem; 
+      flex-direction: column;
     }
     .footerTextinho{
       font-size: 0.8rem;
