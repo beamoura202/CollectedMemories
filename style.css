@@ -1146,7 +1146,7 @@ background-position: left center;
     border: 4px solid #DAD2BC;
   }
   .menumenu{
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
     display: grid;
     width: auto;
