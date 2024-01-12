@@ -1147,6 +1147,8 @@ background-position: left center;
   }
   .menumenu{
     overflow: scroll;
+    scrollbar-width: thin; /* Especifica a largura da barra de rolagem (apenas para navegadores que suportam a propriedade) */
+  -ms-overflow-style: none;
     position: relative;
     display: grid;
     width: auto;
@@ -1159,6 +1161,9 @@ background-position: left center;
     margin-right: 60px;
     grid-template-rows: 20% 60% 20%;
     grid-row-gap: 2%;
+  }
+  .menumenu::-webkit-scrollbar {
+    display: none;
   }
 }
 
