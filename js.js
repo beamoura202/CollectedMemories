@@ -158,7 +158,7 @@ var filterOp = ['','',''];
                     });
             }
             
-            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects/65a016b4aa609f4b521b3d86?read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
+            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects?pretty=true&query=%7B%22type%22:%22objetos%22%7D&limit=100&skip=0&read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
             
             buscarDadosDaAPI(urlDaAPI)
                 .then(dadosRetornados => {
@@ -166,7 +166,7 @@ var filterOp = ['','',''];
                           //console.log(dadosRetornados);
                           allItensCarregados=[];
                           
-                          total = Object.keys(dadosRetornados.object.metadata).length;
+                          total = dadosRetornados.objects.length;
 
 
                           if(lim<=total){
@@ -177,7 +177,9 @@ var filterOp = ['','',''];
 
                           //colocar ids em objetos para fazer a correspondecia com as imagens
                           
-                          let Dtotal = Object.entries(setDadosStrucutur(dadosRetornados.object.metadata)).map(([key, value]) => ({ key, value }));
+                          let Dtotal = setDadosStrucutur(dadosRetornados.objects);
+
+                          console.log(Dtotal);
 
                           //clone array
                           dadosTodos = [...Dtotal]; 
@@ -243,12 +245,12 @@ var filterOp = ['','',''];
           
 
         //CARREGAR IMG 
-          img.setAttribute('src', dado.value.image.url);
-          img.setAttribute('alt', dado.title);
+          img.setAttribute('src', dado.metadata.image.url);
+          img.setAttribute('alt', dado.metadata.title);
 
           img.onload = function() {
             //Where loaded 
-            loadedImage(dado.value.i, this);
+            loadedImage(dado.metadata.i, this);
           };
 
           divCaneca.setAttribute('class', 'caneca');
@@ -257,7 +259,7 @@ var filterOp = ['','',''];
         //Carregar Efeito
             divEfeitoPop.setAttribute('class', 'efeitoPOP hoverPiece');
             divAllObj.onclick = function(){
-              redirectPg(dado.value.i);
+              redirectPg(dado.metadata.i);
             }    
 
 
@@ -291,11 +293,11 @@ var filterOp = ['','',''];
                 if(i==0){
                     aux = '0 0 260 255';
                     auxB = 'TextCurv';
-                    auxC = dado.value.title;
+                    auxC = dado.metadata.title;
                 }else{
                     aux = '0 0 260 230';
                     auxB = 'TextCurv2';
-                    auxC = dado.value.subtitle;
+                    auxC = dado.metadata.subtitle;
                 }
             
             svg = svgT[0] + aux + svgT[1] + auxB + svgT[2] + auxC + svgT[3];
@@ -353,7 +355,7 @@ var filterOp = ['','',''];
                           if(dispMostrar[i][j].i!='-'){
                               aux2 = loadItem(dispMostrar[i][j],i,j);
                               console.log(aux2);
-                              itensCarregados.push({status:false, idd:dispMostrar[i][j].value.i, w:0, h:0});
+                              itensCarregados.push({status:false, idd:dispMostrar[i][j].metadata.i, w:0, h:0});
 
                               //allMedidas+=verifyMedidas(dispMostrar[i][j].value.type);
 
@@ -464,10 +466,10 @@ var filterOp = ['','',''];
 
                 //Obter a imagem de origem ja carregada para obter o comprimento e largura
                   var imagem = new Image();
-                  let image = dadosTodos.find((ele)=> ele.value.i === id);
+                  let image = dadosTodos.find((ele)=> ele.metadata.i === id);
 
                   console.log(image);
-                  imagem.src = image.value.image.url;
+                  imagem.src = image.metadata.image.url;
                   console.log(imagem.width , imagem.height);
                 
                   item.w = imagem.width;
@@ -611,7 +613,7 @@ var filterOp = ['','',''];
           for(var j=0; j <dispMostrar[i].length; j++){
               //verifica que nao é um espaco em branco    
               if(dispMostrar[i][j].i!='-'){
-                      let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].value.i);
+                      let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].metadata.i);
                          if(!aux.status){
                             loaded=false;    
                             break;
@@ -642,7 +644,7 @@ var filterOp = ['','',''];
               //get medidas Juntas
               for(let j = 0; j<dispMostrar[i].length; j++){
                 if(dispMostrar[i][j].i!='-'){
-                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].value.i);
+                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].metadata.i);
                   mediJuntas+=aux.w; 
                 }else{
                   mediJuntas+=250;
@@ -653,7 +655,7 @@ var filterOp = ['','',''];
 
               for(let j = 0; j<dispMostrar[i].length; j++){
                 if(dispMostrar[i][j].i!='-'){
-                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].value.i);
+                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].metadata.i);
                   arrayPerce.push((aux.w*100)/mediJuntas);
                 }else{
                   arrayPerce.push((250*100)/mediJuntas);
@@ -684,22 +686,22 @@ var filterOp = ['','',''];
                           if(orderElement === 'decade'){ //ORDENAR 
                             if(order === 'false'){ //ASC
                               //Copiar o array e atribuição
-                              arrayOrder = [...dadosFilter].sort((a, b) => a.value.decade - b.value.decade);
+                              arrayOrder = [...dadosFilter].sort((a, b) => a.metadata.decade - b.metadata.decade);
                             }else if(order === 'true'){ //DESC
                               //Copiar o array e atribuição
-                              arrayOrder = [...dadosFilter].sort((a, b) => b.value.decade - a.value.decade);
+                              arrayOrder = [...dadosFilter].sort((a, b) => b.metadata.decade - a.metadata.decade);
                             }
               
                           }else if(orderElement == 'title'){ //ORDENAR TITLE
                             if(order === 'true'){ //ASC
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                                a.value.title > b.value.title ? 1 : -1,
+                                a.metadata.title > b.metadata.title ? 1 : -1,
                               );
                             }else if(order === 'false'){ //DESC
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                              a.value.title > b.value.title ? -1 : 1,
+                              a.metadata.title > b.metadata.title ? -1 : 1,
                             );
                             }
               
@@ -708,12 +710,12 @@ var filterOp = ['','',''];
                               console.log('aaaab');
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                                a.value.type > b.value.type ? 1 : -1,
+                                a.metadata.type > b.metadata.type ? 1 : -1,
                               );
                             }else if(order === 'false'){ //DESC
                               //Copiar o array e atribuição
                               arrayOrder = [...dadosFilter].sort((a, b) =>
-                              a.value.type > b.value.type ? -1 : 1,
+                              a.metadata.type > b.metadata.type ? -1 : 1,
                             );
                             }
                           }else{
@@ -743,16 +745,16 @@ var filterOp = ['','',''];
 
                 //FILTER TYPE
                     if(filterOp[0] !=''){//alterar para um array e um find 
-                      dataFiltrada = [...dadosTodos].filter( dado => dado.value.subtitle.toLowerCase() === filterOp[0]);
+                      dataFiltrada = [...dadosTodos].filter( dado => dado.metadata.subtitle.toLowerCase() === filterOp[0]);
 
                 //FILTER DECADE
                     }
                     if(filterOp[1] !=''){ //alterar para um array e um find 
-                      dataFiltrada = [...dataFiltrada].filter( dado => dado.value.decade.toLowerCase() === filterOp[1]);
+                      dataFiltrada = [...dataFiltrada].filter( dado => dado.metadata.decade.toLowerCase() === filterOp[1]);
                     }
                     if(filterOp[2] !=''){
                         const padrao = new RegExp(filterOp[2], 'i');
-                        dataFiltrada = [...dataFiltrada].filter(dado => padrao.test(dado.value.title.toLowerCase()));
+                        dataFiltrada = [...dataFiltrada].filter(dado => padrao.test(dado.metadata.title.toLowerCase()));
                     }
 
                     if(filterOp[1] =='' && filterOp[0] =='' && filterOp[2] ==''){
@@ -775,17 +777,17 @@ var filterOp = ['','',''];
           }
 
       function setDadosStrucutur(dadosExt){
-        const chaves = Object.keys(dadosExt);
-        let aux = dadosExt;
+        console.log(dadosExt);
+        
 
-        console.log(chaves.length);
-         
-        for(let a = 0; a<chaves.length; a++){
-          aux[chaves[a]].i=a;
-          console.log(aux[chaves[a]].i);
-        }
-
-        return aux;
+        for (var i = 0; i < dadosExt.length; i++) {
+          var metadata = dadosExt[i].metadata;
+          
+          // Adicionar o elemento 'i' e associar um valor (neste caso, a posição do objeto no array)
+          metadata.i = i;
+      }
+      
+        return dadosExt;
       }    
 
 
