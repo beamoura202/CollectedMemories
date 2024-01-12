@@ -64,7 +64,7 @@ var filterOp = ['','',''];
 
                filterOp[2] = e.target.value;
 
-               filter('search',e.target.value);
+               filter();
                reOrder('title','false');
                setInArmario();//set data no armario com os espacos
                displayArmario(nItensR);
@@ -160,7 +160,7 @@ var filterOp = ['','',''];
                     });
             }
             
-            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects?pretty=true&query=%7B%22type%22:%22objetos%22%7D&limit=20&read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,id,";
+            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects?pretty=true&query=%7B%22type%22:%22objetos%22%7D&limit=2000&read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,id,";
             
             buscarDadosDaAPI(urlDaAPI)
                 .then(dadosRetornados => {
@@ -749,14 +749,22 @@ var filterOp = ['','',''];
 
                 //FILTER TYPE
                     if(filterOp[0] !=''){//alterar para um array e um find 
-                      dataFiltrada = [...dadosTodos].filter( dado => dado.metadata.subtitle.toLowerCase() === filterOp[0]);
+                       dataFiltrada = [...dadosTodos].filter( dado => dado.metadata.subtitle.toLowerCase() === filterOp[0]);
 
                 //FILTER DECADE
                     }
                     if(filterOp[1] !=''){ //alterar para um array e um find 
-                      dataFiltrada = [...dataFiltrada].filter( dado => dado.metadata.decade.toLowerCase() === filterOp[1]);
+                       if(dataFiltrada.length<=0){
+                        dataFiltrada = [...dadosTodos];
+                       }
+                       dataFiltrada = [...dataFiltrada].filter( dado => dado.metadata.decade.toLowerCase() === filterOp[1]);
                     }
                     if(filterOp[2] !=''){
+                        
+                        if(dataFiltrada.length<=0){
+                           dataFiltrada = [...dadosTodos];
+                        }
+
                         const padrao = new RegExp(filterOp[2], 'i');
                         dataFiltrada = [...dataFiltrada].filter(dado => padrao.test(dado.metadata.title.toLowerCase()));
                     }
