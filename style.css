@@ -713,7 +713,6 @@ flex-wrap: nowrap;
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Align content at the bottom */
   padding: 20px;
   color: #ffffff; /* Text color */
 
@@ -755,6 +754,7 @@ font-size: 1.5rem;
   margin-left: 5%;
   margin-right: 5%;
   padding: 1%;
+  margin-top: 35px;
   justify-content: center;
 
 }
@@ -897,6 +897,7 @@ justify-content: end;
     display: grid;
     justify-items: center;
     align-items: end;
+    grid-template-rows: 50% 50%;
   }
   .TextoCanecas p {
     overflow-y: scroll; /* Enable scrolling on the paragraph */
