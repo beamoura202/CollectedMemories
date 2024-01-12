@@ -253,11 +253,11 @@ var hoverObjs = [];
             divTextPop[i] = document.createElement('div');
 
                 if(i==0){
-                    aux = '0 0 260 225';
+                    aux = '0 0 260 255';
                     auxB = 'TextCurv';
                     auxC = dado.value.title;
                 }else{
-                    aux = '0 0 260 200';
+                    aux = '0 0 260 230';
                     auxB = 'TextCurv2';
                     auxC = dado.value.subtitle;
                 }
@@ -281,50 +281,120 @@ var hoverObjs = [];
 
         //grid item
         let rows = [];
+        let rows2 = [];
+        let allrows = [];
         let aux2;
+        let aux3;
         let allMedidas=0;
         //string 
         let medidas;
 
-        for(let i = 0; i<dispMostrar.length; i++){ 
-            allMedidas=0;
+        if(dadosOrdenados.length>0){
+              for(let i = 0; i<dispMostrar.length; i++){ 
+                  allMedidas=0;
 
-            rows[i] = document.createElement('div');
-            rows[i].setAttribute('class','grid-item');
+                  rows[i] = document.createElement('div');
+                  rows[i].setAttribute('class','grid-item');
 
-            if (i % 2 === 0) {
-              rows[i].style.backgroundImage = 'url("' + imageUrlEven + '")';
-            } else {
-              rows[i].style.backgroundImage = 'url("' + imageUrlOdd + '")';
-            }
+                  allrows[i] = document.createElement('div');
+                  allrows[i].setAttribute('class','grid-contain-2');
 
-                for(let j = 0;  j<dispMostrar[i].length; j++){
-                    if(dispMostrar[i][j].i!='-'){
-                        aux2 = loadItem(dispMostrar[i][j],i,j);
-                        itensCarregados.push({status:false, idd:dispMostrar[i][j].value.i, w:0, h:0});
+                  rows2[i] = document.createElement('div');
+                  rows2[i].setAttribute('class','contentLoading');
+                  aux3 = document.createElement('div');
+                  aux3.setAttribute('class','contentAviso');
+                  aux3.innerText = "Carregar As Prateleiras";
+                  rows2[i].appendChild(aux3);
+                  
 
-                        //allMedidas+=verifyMedidas(dispMostrar[i][j].value.type);
-
-                    }else{
-                        aux2 = document.createElement('div');
-                        aux2.setAttribute('class','allObj');
-
-                    }
-                      rows[i].appendChild(aux2);
-                }
-
-                if( i === dispMostrar.length-1 ){
-                  for(let j = 0; j< nItensR - dispMostrar[i].length; j++){
-                    aux2 = document.createElement('div');
-                    aux2.setAttribute('class','allObj');
-                    rows[i].appendChild(aux2);
+                  if (i % 2 === 0) {
+                    allrows[i].style.backgroundImage = 'url("' + imageUrlEven + '")';
+                  } else {
+                    allrows[i].style.backgroundImage = 'url("' + imageUrlOdd + '")';
                   }
+
+                      for(let j = 0;  j<dispMostrar[i].length; j++){
+                          if(dispMostrar[i][j].i!='-'){
+                              aux2 = loadItem(dispMostrar[i][j],i,j);
+                              console.log(aux2);
+                              itensCarregados.push({status:false, idd:dispMostrar[i][j].value.i, w:0, h:0});
+
+                              //allMedidas+=verifyMedidas(dispMostrar[i][j].value.type);
+
+                          }else{
+                              aux2 = document.createElement('div');
+                              aux2.setAttribute('class','allObj');
+
+                          }
+                          rows[i].appendChild(aux2);
+                      }
+
+                  if( i === dispMostrar.length-1 ){
+                          for(let j = 0; j< nItensR - dispMostrar[i].length; j++){
+                            aux2 = document.createElement('div');
+                            aux2.setAttribute('class','allObj');
+                            rows[i].appendChild(aux2);
+                          }
+                  }
+
+                      //rows[i].style.gridTemplateColumns = 
+
+                  allrows[i].appendChild(rows[i]);
+                  allrows[i].appendChild(rows2[i]);
+
+                  gridContainer.appendChild(allrows[i]);
+                }
+        }else{
+          for(let i=0; i<2; i++){
+                allrows[i] = document.createElement('div');
+                allrows[i].setAttribute('class','grid-contain-2');
+
+                rows2[i] = document.createElement('div');
+                rows2[i].setAttribute('class','contentVazio');
+                aux3 = document.createElement('div');
+                aux3.setAttribute('class','contentAviso');
+                aux3.innerText = "Sem Produtos para Preencher";
+                rows2[i].appendChild(aux3);
+
+                if (i % 2 === 0) {
+                  allrows[i].style.backgroundImage = 'url("' + imageUrlEven + '")';
+                } else {
+                  allrows[i].style.backgroundImage = 'url("' + imageUrlOdd + '")';
                 }
 
-                rows[i].style.gridTemplateColumns = 
-
-            gridContainer.appendChild(rows[i]);
+                allrows[i].appendChild(rows2[i]);
+                gridContainer.appendChild(allrows[i]);
+          }
         }
+        setVisisbilidade();
+      }
+
+      function setVisisbilidade(){
+          let rows = document.querySelectorAll('.grid-item');
+          let rows2 = document.querySelectorAll('.contentLoading');
+          
+          for(let i=0; i<rows.length; i++){
+                if(!rowsCarregadas[i]){
+                  if(!rows[i].classList.contains('none')){
+                    rows[i].classList.add('none');
+                  }
+                  if(rows2[i].classList.contains('none')){
+                    rows2[i].classList.remove('none');
+                  }
+                  console.log(rowsCarregadas[i]);
+                }else{
+                  if(!rows2[i].classList.contains('none')){
+                    rows2[i].classList.add('none');
+                  }
+                  
+                  if(rows[i].classList.contains('none')){
+                    rows[i].classList.remove('none');
+                  }
+                  console.log("asdaddadsd2");
+                }
+          }
+
+          console.log(setVisisbilidade);
       }
       
       function loadedImage(id,callback){ //id-> id da peca
@@ -491,7 +561,10 @@ var hoverObjs = [];
                  }
           }
           rowsCarregadas[i] = loaded;
+          console.log(rowsCarregadas);
         }
+
+        setVisisbilidade();
 
         //setRowDimesions();
         
@@ -603,7 +676,6 @@ var hoverObjs = [];
                 }
               }
 
-
           //FILTER 
           function filter(filterBy,value){
             if(dadosTodos!=null && dadosTodos.length>0){
@@ -687,6 +759,7 @@ var hoverObjs = [];
         if(nItensR !== lastNItensR){
           displayArmario(nItensR);
           loadRow();
+          setVisisbilidade();
         }
 
         lastNItensR = nItensR;

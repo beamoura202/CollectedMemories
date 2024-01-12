@@ -10,7 +10,10 @@ body{
 /*MESCHER NAS CORES*/
 :root{
   --branco:rgb(230, 230, 230);
-  --castanho: rgb(243, 219, 166);
+  --castanho: #faf3e9ff;
+  --castanho2: #ddd6c1ff;
+  --castanho3: #c2b7a9ff;
+  --castanho4: #897d6fff;
 }
 
 /*CABEÇALHO*/
@@ -86,7 +89,129 @@ body{
   position: relative;
  }
 
+ 
+ 
+ .grid-contain-2{
+  width: 100%;
+  height: 40vh;
 
+  display:block;
+
+  position: relative;
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+ }
+
+ .none{
+  display: none !important;
+ }
+
+ .contentLoading{
+   width: 100%;
+   height: calc(100% - 22px);
+
+   display: block;
+   position: absolute;
+   
+   transform: translate(-50% ,0);
+
+   bottom: 22px;
+   left: 50%;
+
+   background-color: #2424248a;
+
+   animation: infinite carregar 2000ms;
+ }
+
+ .contentAviso{
+   width: 50%;
+   height: 50%;
+
+   display: flex;
+   position: absolute;
+
+   transform: translate(-50% , 0);
+   color: var(--castanho);
+
+   font-family: 'Antonio',sans-serif;
+   font-size: 2rem;
+   
+   
+   justify-content: center;
+   align-items: end;
+
+   margin: auto;
+
+   bottom:0;
+   left:50%;
+
+   animation: infinite carregar2 2000ms;
+ }
+
+ .contentVazio{
+  width: 100%;
+  height: calc(100% - 22px);
+
+  display: block;
+  position: absolute;
+  
+  transform: translate(-50% ,0);
+
+  bottom: 22px;
+  left: 50%;
+
+  background-color: #2424248a;
+}
+
+.contentAviso2{
+  width: 50%;
+  height: 50%;
+
+  display: flex;
+  position: absolute;
+
+  transform: translate(-50% , 0);
+  color: var(--castanho);
+
+  font-family: 'Antonio',sans-serif;
+  font-size: 2rem;
+  
+  
+  justify-content: center;
+  align-items: end;
+
+  margin: auto;
+
+  bottom:0;
+  left:50%;
+
+}
+
+ @keyframes carregar {
+   0%{
+    background-color: #2424248a;
+   }
+   50%{
+    background-color: #2424243d;
+   }
+   100%{
+    background-color: #2424248a;
+   }
+ }
+
+ @keyframes carregar2 {
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 1;
+  }
+}
 
  /* ... (your initial styles) ... */
 
@@ -178,7 +303,7 @@ body{
 
 .grid-item {
   width: auto;
-  height: 40vh;
+  height: calc(100% - 30px);
   
   position: relative;
   display: grid;
@@ -186,10 +311,6 @@ body{
   grid-template-columns: 16% 16% 16% 16% 16% 16%;
 
   align-items: center;
-
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
 
   /*padding para nao ficar a tras das laterais*/
   padding-left: 100px;
