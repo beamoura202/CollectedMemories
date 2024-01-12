@@ -90,13 +90,15 @@ var filterOp = ['','',''];
               botoesType.forEach((bt)=>{bt.addEventListener('click',function(){
                     
                     for(let i=0; i<botoesType.length; i++){
-                      if(!bt.classList.contains('dark') && bt===botoesType[i]){
+                      if(bt===botoesType[i]){
                         bt.classList.toggle('dark');
 
-                        filterOp[0] = '';
                         if(bt.classList.contains('dark')){
                             filterOp[0] = bt.value;         
+                        }else{
+                            filterOp[0] = '';
                         }
+
                         console.log(filterOp[0]);
                       }else{
                         if(botoesType[i].classList.contains('dark')){
@@ -120,7 +122,7 @@ var filterOp = ['','',''];
                botoesDecade.forEach((bt)=>{bt.addEventListener('click',function(){
 
                 for(let i=0; i<botoesDecade.length; i++){
-                  if(!bt.classList.contains('dark') && bt===botoesDecade[i]){
+                  if(bt===botoesDecade[i]){
                     bt.classList.toggle('dark');
                     if(bt.classList.contains('dark')){
                       filterOp[1] = bt.value;
