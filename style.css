@@ -840,6 +840,19 @@ font-size: 1.5rem;
       
     
   }
+
+  .divTextoCanecas {
+    background-size: cover; /* or contain, depending on your preference */
+    background-position: center top;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content at the bottom */
+    
+    margin-top: 20px;
+    justify-content: center;
+  
+  }
   .ImagemCanecas{
     position: absolute;
     top:0;
@@ -869,7 +882,7 @@ justify-content: end;
     left: 0;
     z-index: -2;
     width: 100vw;
-    height:45vh;
+    height:43vh;
     background-image: url('PecasArmario/background_01.svg');
     background-size: cover;
     background-position: center center;
