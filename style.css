@@ -941,7 +941,9 @@ justify-content: end;
     color: var(--branco);
     font-size: 4rem;
   }
-  
+  .nomeCaneca{
+    margin-top: 100px;
+  }
 }
 
 
