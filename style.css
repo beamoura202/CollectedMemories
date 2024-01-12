@@ -66,6 +66,29 @@ body{
   z-index: 40;
 }
 
+.control>button{
+  width: 100%;
+  height: 100%;
+  outline: none;
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
+.control>button>svg{
+  width: 100%;
+  height: 100%;
+  filter: contrast(1);
+  transition: filter 100ms linear;
+}
+
+.control>button>svg:hover{
+  width: 100%;
+  height: 100%;
+  filter: contrast(0.5);
+}
+
+
 
 /*menu paginas individuais e about*/
 .headerMenu2{
@@ -215,6 +238,44 @@ body{
 
 .footerInfoTexto{
   color: var(--castanho4);
+}
+
+.passPages{
+  display:none;
+
+  width: 100vw;
+  height: auto;
+
+  justify-content: center;
+  align-items: center;
+  padding:10px 0;
+}
+
+.control{
+  display: grid;
+
+  width: 30%;
+  height: 100%;
+
+  justify-content: space-between;
+
+  grid-template-columns: 25% 50% 25%;
+}
+
+#pages{
+ display: flex;
+ width: 100%;
+ height: 100%;
+
+ overflow: hidden;
+ justify-content: center;
+ align-items: center;
+
+ font-family: 'Philosopher' ,sans-serif;
+ font-size: 1.2em;
+ font-weight: bold;
+
+ color: var(--castanho4);
 }
 
  /* ... (your initial styles) ... */
