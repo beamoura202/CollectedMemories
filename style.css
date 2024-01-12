@@ -290,6 +290,10 @@ body{
     }
 }
 
+.dark{
+  filter: brightness(65%) !important;
+}
+
 /*LISTAGEM DE ARTIGOS*/
  .container{
   position: relative;

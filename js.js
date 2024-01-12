@@ -35,7 +35,7 @@ var pagesUrl = [];
 
 var hoverObjs = [];
 
-var filterOp = [];
+var filterOp = ['','',''];
 
 //////PRE_LOAD
     var imageUrlOdd = '../PecasArmario/tudoJunto_01.svg';
@@ -61,6 +61,9 @@ var filterOp = [];
 
             searchBar = document.querySelector('#searchInput');
             searchBar.addEventListener('input', (e)=>{
+
+               filterOp[2] = e.target.value;
+
                filter('search',e.target.value);
                reOrder('title','false');
                setInArmario();//set data no armario com os espacos
@@ -85,41 +88,58 @@ var filterOp = [];
              botoesType = document.querySelectorAll('.butoesdivmenuFiltros>button');
               console.log(botoesType);
               botoesType.forEach((bt)=>{bt.addEventListener('click',function(){
-                    console.log(bt.value);
-                    filter('type',bt.value);
-                    reOrder('title','false');
-                    setInArmario();//set data no armario com os espacos
-                    displayArmario(nItensR);
-                    updateRows();
-                    loadRow();
-                     
-
-                    for(let i=0; i<botoesType; i++){
+                    
+                    for(let i=0; i<botoesType.length; i++){
                       if(!bt.classList.contains('dark') && bt===botoesType[i]){
-                        bt.classList.add('dark');
+                        bt.classList.toggle('dark');
+
+                        filterOp[0] = '';
+                        if(bt.classList.contains('dark')){
+                            filterOp[0] = bt.value;         
+                        }
+                        console.log(filterOp[0]);
                       }else{
                         if(botoesType[i].classList.contains('dark')){
                           botoesType[i].classList.remove('dark');
                         }
                       }
-
                     }
+
+                    console.log(bt.value);
+                    filter();
+                    reOrder('title','false');
+                    setInArmario();//set data no armario com os espacos
+                    displayArmario(nItensR);
+                    updateRows();
+                    loadRow();
                   }
               )});
 
              botoesDecade = document.querySelectorAll('.butoesdivmenuFiltros2>button');
                console.log(botoesDecade);
                botoesDecade.forEach((bt)=>{bt.addEventListener('click',function(){
-                
-                filter('decade',bt.value);
+
+                for(let i=0; i<botoesDecade.length; i++){
+                  if(!bt.classList.contains('dark') && bt===botoesDecade[i]){
+                    bt.classList.toggle('dark');
+                    if(bt.classList.contains('dark')){
+                      filterOp[1] = bt.value;
+                    }else{
+                      filterOp[1] = '';
+                    }
+                  }else{
+                    if(botoesDecade[i].classList.contains('dark')){
+                      botoesDecade[i].classList.remove('dark');
+                    }
+                  }
+                }
+
+                filter();
                 reOrder('title','false');
                 setInArmario();//set data no armario com os espacos
                 displayArmario(nItensR);
                 updateRows();
                 loadRow();
-
-                console.log(bt.value);
-              
               
               })});
 
@@ -357,9 +377,31 @@ var filterOp = [];
                   allrows[i].appendChild(rows2[i]);
 
                   gridContainer.appendChild(allrows[i]);
+
+                }if(dispMostrar.length<3){
+                  for(let i=0; i<3-dispMostrar.length; i++){
+                    allrows[i] = document.createElement('div');
+                    allrows[i].setAttribute('class','grid-contain-2');
+    
+                    rows2[i] = document.createElement('div');
+                    rows2[i].setAttribute('class','contentVazio');
+                    aux3 = document.createElement('div');
+                    aux3.setAttribute('class','contentAviso');
+                    aux3.innerText = "Sem Produtos para Preencher";
+                    rows2[i].appendChild(aux3);
+    
+                    if (i % 2 === 0) {
+                      allrows[i].style.backgroundImage = 'url("' + imageUrlEven + '")';
+                    } else {
+                      allrows[i].style.backgroundImage = 'url("' + imageUrlOdd + '")';
+                    }
+    
+                    allrows[i].appendChild(rows2[i]);
+                    gridContainer.appendChild(allrows[i]);
+              }                
                 }
         }else{
-          for(let i=0; i<2; i++){
+          for(let i=0; i<3; i++){
                 allrows[i] = document.createElement('div');
                 allrows[i].setAttribute('class','grid-contain-2');
 
@@ -691,36 +733,33 @@ var filterOp = [];
               }
 
           //FILTER 
-          function filter(filterBy,value){
+          function filter(){
             if(dadosTodos!=null && dadosTodos.length>0){
-              if(filterBy!='' && filterBy!=null && filterBy!=undefined){
+              if(filterOp!=null && filterOp!=undefined){
 
-                //Verificação de segundo nivel para o caso de alteração de valores no html
-                let filter = filterBy.toLowerCase();
-                let valueB = value.toLowerCase();
                 let dataFiltrada = [];
 
                 //FILTER TYPE
-                    if(filter === 'type'){//alterar para um array e um find 
-                      dataFiltrada = [...dadosTodos].filter( dado => dado.value.subtitle.toLowerCase() === valueB);
+                    if(filterOp[0] !=''){//alterar para um array e um find 
+                      dataFiltrada = [...dadosTodos].filter( dado => dado.value.subtitle.toLowerCase() === filterOp[0]);
 
                 //FILTER DECADE
-                    }else if(filter === 'decade'){ //alterar para um array e um find 
-                      dataFiltrada = [...dadosTodos].filter( dado => dado.value.decade.toLowerCase() === valueB);
-
-                //NO FILTER
-                    }else{
-                      dataFiltrada = [...dadosTodos];
-                      console.error('NOT URGENT: unrec filter'); 
+                    }
+                    if(filterOp[1] !=''){ //alterar para um array e um find 
+                      dataFiltrada = [...dataFiltrada].filter( dado => dado.value.decade.toLowerCase() === filterOp[1]);
+                    }
+                    if(filterOp[2] !=''){
+                        const padrao = new RegExp(filterOp[2], 'i');
+                        dataFiltrada = [...dataFiltrada].filter(dado => padrao.test(dado.value.title.toLowerCase()));
                     }
 
-                    if(filter === 'search'){
-                        const padrao = new RegExp(valueB, 'i');
-                        dataFiltrada = [...dadosTodos].filter(dado => padrao.test(dado.value.title.toLowerCase()));
+                    if(filterOp[1] =='' && filterOp[0] =='' && filterOp[2] ==''){
+                      dataFiltrada = [...dadosTodos];
                     }
 
                     dadosFilter = dataFiltrada;
                     console.log(dadosFilter);
+                    console.log(filterOp);
 
               }else{
                 console.error('empty filterBy or null value ://');
