@@ -415,18 +415,6 @@ section{
   margin-top: -100vh;
 }
 
-/*FOOTER*/
-
-footer svg{
-  position: relative;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-svg{
-  overflow: hidden;
-}
 
 
 
@@ -586,8 +574,8 @@ flex-wrap: nowrap;
   height: auto;
 }
 .ImagemCanecas img {
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
 }
 
 .TextoCanecas {
@@ -758,6 +746,7 @@ justify-content: end;
   }
 
   .fundopreto{
+    display: grid;
     width: 100%;
     height: 55vh;
     background-image: url('img/backCollected\ 1.png');
@@ -823,7 +812,7 @@ justify-content: end;
   .TextCurvIndividual{
     font-family: 'OleoScript',sans-serif;
     fill: var(--branco);
-    font-size: 5rem;
+    font-size: 4rem;
   }
 
   
@@ -835,7 +824,7 @@ justify-content: end;
     margin-bottom: 30px;
   }
   .fundopreto{
-    width: 100%;
+    width: auto;
     height: 100%;
     background-image: url('img/backCollected\ 1.png');
     background-size: contain;
@@ -1363,4 +1352,109 @@ margin-top: auto;
     transform: rotate(0deg);
     transform-origin: 50% 75%;
   }
+}
+
+
+
+
+
+
+/*FOOTER*/
+
+.footerInfo svg{
+  
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+svg{
+  overflow: hidden;
+}
+.footerInfo{
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.footerInfoTexto{
+  position: absolute;
+  display: flex;
+  bottom: 0%;
+  width: 80%;
+  height: 100%;
+  /* padding: 3%; */
+  padding-left: 10vw;
+  padding-right: 10vw;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  
+}
+
+.footerInfoTexto2{
+  
+  position: relative;
+  display: flex;
+  width: 50%;
+  justify-content: flex-start;
+
+  font-family: 'Philosopher',sans-serif;
+  color: #4E4943;
+  font-weight:normal;
+  font-size: 1rem; 
+}
+
+
+.footerContacts{
+  position: relative;
+  
+  
+
+}
+
+.footerSuport{
+  position: relative;
+  margin-left: 10%;
+}
+.footerTextinho{
+  position: relative;
+  width: 20vw;
+  font-family: 'Philosopher',sans-serif;
+  color: #4E4943;
+  font-weight:normal;
+  font-size: 1rem; 
+}
+
+
+
+
+
+
+
+@media (max-width: 900px) {
+  .footerTextinho{
+    position: relative;
+    width: 40vw;
+  }
+
+    .footerInfoTexto{
+    
+      width: 90%;
+      height: 100%;
+      /* padding: 3%; */
+      padding-left: 4vw;
+      padding-right: 10vw;
+      flex-direction: row;
+      
+      align-items: center;
+    }
+    .footerInfoTexto2{
+      font-size: 0.8rem; 
+    }
+    .footerTextinho{
+      font-size: 0.8rem;
+    }
 }
