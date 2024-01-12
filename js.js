@@ -160,7 +160,7 @@ var filterOp = ['','',''];
                     });
             }
             
-            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects?pretty=true&query=%7B%22type%22:%22objetos%22%7D&limit=100&skip=0&read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
+            const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects?pretty=true&query=%7B%22type%22:%22objetos%22%7D&limit=20&read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,id,";
             
             buscarDadosDaAPI(urlDaAPI)
                 .then(dadosRetornados => {
@@ -179,7 +179,7 @@ var filterOp = ['','',''];
 
                           //colocar ids em objetos para fazer a correspondecia com as imagens
                           
-                          let Dtotal = setDadosStrucutur(dadosRetornados.objects);
+                          let Dtotal = dadosRetornados.objects;
 
                           console.log(Dtotal);
 
@@ -252,7 +252,7 @@ var filterOp = ['','',''];
 
           img.onload = function() {
             //Where loaded 
-            loadedImage(dado.metadata.i, this);
+            loadedImage(dado.id, this);
           };
 
           divCaneca.setAttribute('class', 'caneca');
@@ -261,7 +261,7 @@ var filterOp = ['','',''];
         //Carregar Efeito
             divEfeitoPop.setAttribute('class', 'efeitoPOP hoverPiece');
             divAllObj.onclick = function(){
-              redirectPg(dado.metadata.i);
+              redirectPg(dado.id);
             }    
 
 
@@ -359,7 +359,7 @@ var filterOp = ['','',''];
                           if(dispMostrar[i][j].i!='-'){
                               aux2 = loadItem(dispMostrar[i][j],i,j);
                               console.log(aux2);
-                              itensCarregados.push({status:false, idd:dispMostrar[i][j].metadata.i, w:0, h:0});
+                              itensCarregados.push({status:false, idd:dispMostrar[i][j].id, w:0, h:0});
 
                               //allMedidas+=verifyMedidas(dispMostrar[i][j].value.type);
 
@@ -470,7 +470,7 @@ var filterOp = ['','',''];
 
                 //Obter a imagem de origem ja carregada para obter o comprimento e largura
                   var imagem = new Image();
-                  let image = dadosTodos.find((ele)=> ele.metadata.i === id);
+                  let image = dadosTodos.find((ele)=> ele.id === id);
 
                   console.log(image);
                   imagem.src = image.metadata.image.url;
@@ -617,7 +617,7 @@ var filterOp = ['','',''];
           for(var j=0; j <dispMostrar[i].length; j++){
               //verifica que nao é um espaco em branco    
               if(dispMostrar[i][j].i!='-'){
-                      let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].metadata.i);
+                      let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].id);
                          if(!aux.status){
                             loaded=false;    
                             break;
@@ -648,7 +648,7 @@ var filterOp = ['','',''];
               //get medidas Juntas
               for(let j = 0; j<dispMostrar[i].length; j++){
                 if(dispMostrar[i][j].i!='-'){
-                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].metadata.i);
+                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].id);
                   mediJuntas+=aux.w; 
                 }else{
                   mediJuntas+=250;
@@ -659,7 +659,7 @@ var filterOp = ['','',''];
 
               for(let j = 0; j<dispMostrar[i].length; j++){
                 if(dispMostrar[i][j].i!='-'){
-                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].metadata.i);
+                  let aux = itensCarregados.find((ele) => ele.idd == dispMostrar[i][j].id);
                   arrayPerce.push((aux.w*100)/mediJuntas);
                 }else{
                   arrayPerce.push((250*100)/mediJuntas);
@@ -779,21 +779,6 @@ var filterOp = ['','',''];
               console.error('Data not loaded prop. :/');
             }
           }
-
-      function setDadosStrucutur(dadosExt){
-        console.log(dadosExt);
-        
-
-        for (var i = 0; i < dadosExt.length; i++) {
-          var metadata = dadosExt[i].metadata;
-          
-          // Adicionar o elemento 'i' e associar um valor (neste caso, a posição do objeto no array)
-          metadata.i = i;
-      }
-      
-        return dadosExt;
-      }    
-
 
       ///OUTRAS  ///////////////////////////////////////////////////////////////////////////////////////////
       function getRandomInt(max) {

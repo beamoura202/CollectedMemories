@@ -1,3 +1,5 @@
+const urlPart = ['https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects/','?read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,'];
+let id = '';
 
 window.addEventListener("DOMContentLoaded", function () {
     function buscarDadosDaAPI(url) {  
@@ -12,23 +14,18 @@ window.addEventListener("DOMContentLoaded", function () {
                 console.error(`Erro ao buscar dados: ${error.message}`);
             });
     }
+
+    id = getUrlVar();
     
-    const urlDaAPI = "https://api.cosmicjs.com/v3/buckets/collected-memories-production-19d268e0-ab2a-11ee-ba66-8b61b87e3752/objects/65987df4723ffd2d238b5d07?read_key=KyYPncCMqJ14IQonFQdyh5yIKfZGRRDHqg93DHO0coRKHy1iLw&depth=1&props=slug,title,metadata,";
+    let urlDaAPI = urlPart[0] + id.i + urlPart[1];
+    console.log(urlDaAPI);
     
     buscarDadosDaAPI(urlDaAPI)
         .then(dadosRetornados => {
             if (dadosRetornados) {
-               let urlData = getUrlVar();
 
-               let dadosRetornados1 = dadosRetornados.object.metadata.tudo.objects;
-               
-               if(urlData.i!=undefined || urlData.i!=null){
-                    let dado = dadosRetornados1.find((dad) => dad.i == urlData.i);
-                     
-                    changeContent(dado);
-               }else{
-                    console.error('empty Url');
-               }
+               let dadosRetornados1 = dadosRetornados.object.metadata;         
+                    changeContent(dadosRetornados1);
             }
         });
 });
@@ -61,7 +58,7 @@ function changeContent(dado){
     h2.innerText = dado.subtitle;
     title.innerHTML = dado.title;
 
-    p.innerText = dado.metadata.description;
-    img.src = dado.metadata.image.url;
+    p.innerText = dado.story;
+    img.src = dado.image.url;
 
 }
