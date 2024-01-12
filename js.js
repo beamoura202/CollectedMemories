@@ -345,7 +345,7 @@ var filterOp = ['','',''];
                   rows2[i].setAttribute('class','contentLoading');
                   aux3 = document.createElement('div');
                   aux3.setAttribute('class','contentAviso');
-                  aux3.innerText = "Carregar As Prateleiras";
+                  aux3.innerText = "Loading Shelves";
                   rows2[i].appendChild(aux3);
                   
 
@@ -395,7 +395,7 @@ var filterOp = ['','',''];
                     rows2[i].setAttribute('class','contentVazio');
                     aux3 = document.createElement('div');
                     aux3.setAttribute('class','contentAviso');
-                    aux3.innerText = "Sem Produtos para Preencher";
+                    aux3.innerText = "Without Content";
                     rows2[i].appendChild(aux3);
     
                     if (i % 2 === 0) {
