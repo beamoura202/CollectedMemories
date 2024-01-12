@@ -22,6 +22,14 @@ window.addEventListener("DOMContentLoaded", function () {
 
     var botaoMenu = document.getElementById('botaoMenu');
     if (botaoMenu) {
+        botaoMenu.addEventListener('click', function () {
+            // Rola a página até a posição width=0
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+        });
         botaoMenu.addEventListener('click', showMenu);
     } else {
         console.log('Div with ID "botaoMenu" not found');
