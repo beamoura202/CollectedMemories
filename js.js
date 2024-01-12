@@ -150,10 +150,12 @@ var filterOp = ['','',''];
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`Erro na requisição à API: ${response.status}`);
+                            dadosOrdenados=[];
                         }
                         return response.json();
                     })
                     .catch(error => {
+                        loadRow();
                         console.error(`Erro ao buscar dados: ${error.message}`);
                     });
             }
@@ -326,8 +328,10 @@ var filterOp = ['','',''];
         let allMedidas=0;
         //string 
         let medidas;
+ 
+        console.log(dadosOrdenados);
 
-        if(dadosOrdenados.length>0){
+        if(dadosOrdenados.length>0 || dadosOrdenados===null){
               for(let i = 0; i<dispMostrar.length; i++){ 
                   allMedidas=0;
 
