@@ -941,7 +941,9 @@ justify-content: end;
     color: var(--branco);
     font-size: 4rem;
   }
-  
+  .nomeCaneca{
+    margin-top: 100px;
+  }
 }
 
 
@@ -1144,7 +1146,9 @@ background-position: left center;
     border: 4px solid #DAD2BC;
   }
   .menumenu{
-    overflow: hidden;
+    overflow: scroll;
+    scrollbar-width: thin; /* Especifica a largura da barra de rolagem (apenas para navegadores que suportam a propriedade) */
+  -ms-overflow-style: none;
     position: relative;
     display: grid;
     width: auto;
@@ -1158,7 +1162,11 @@ background-position: left center;
     grid-template-rows: 20% 60% 20%;
     grid-row-gap: 2%;
   }
+  .menumenu::-webkit-scrollbar {
+    display: none;
+  }
 }
+
 
 /*Menu Pages*/
 .menuPages{
