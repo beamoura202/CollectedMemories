@@ -995,12 +995,22 @@ background-position: left center;
 
     
 }
+
 .botaoX{
   margin: 10px;
   position: absolute;
   top:0;
   left: 0%;
+
+  filter: brightness(100%);
+  transition: filter 250ms linear;
 }
+
+.botaoX:hover{
+  cursor: pointer;
+  filter: brightness(75%);
+}
+
 @media (max-width: 900px) {
   .menu{
   width: 100%;
@@ -1162,6 +1172,7 @@ background-position: left center;
 }
 
 
+
 .divmenuPages{
   position: absolute;
   display: flex;
@@ -1184,6 +1195,17 @@ background-position: left center;
   flex-direction: row;
   justify-content: space-evenly;
 }
+
+.butoesdivmenuPages>button:hover{
+  filter: brightness(75%);
+}
+
+.butoesdivmenuPages>button{
+filter: brightness(100%);
+transition: filter 250ms linear;
+}
+
+
 .butoesdivmenuPages button:first-child{
   background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
       background-size: contain;
@@ -1274,8 +1296,13 @@ background-position: left center;
   justify-content: space-around;
   margin-bottom: 5%;
   flex-wrap: wrap;
-  
+
 }
+
+.butoesdivmenuFiltros>button:hover{
+  filter: brightness(75%);
+}
+
 .butoesdivmenuFiltros button{
      background-size: contain;
       border: none;
@@ -1286,6 +1313,8 @@ background-position: left center;
       color: #877E71;
       font-family: 'OleoScript',sans-serif;
       font-weight: normal;
+      filter: brightness(100%);
+      transition: filter 250ms linear;
 }
 .butoesdivmenuFiltros button:nth-child(1){
   background: url('Coisas-Portas/botoes/botao_01.svg') no-repeat center center; /* Default background */
@@ -1332,7 +1361,12 @@ background-position: left center;
   color: #877E71;
   font-family: 'OleoScript',sans-serif;
   font-weight: normal;
- 
+  filter: brightness(100%);
+  transition: filter 250ms linear;
+}
+
+.butoesdivmenuFiltros2>button:hover{
+  filter: brightness(75%);
 }
 
 .butoesdivmenuFiltros2 button:nth-child(1){

@@ -35,6 +35,8 @@ var pagesUrl = [];
 
 var hoverObjs = [];
 
+var filterOp = [];
+
 //////PRE_LOAD
     var imageUrlOdd = '../PecasArmario/tudoJunto_01.svg';
     var imageUrlEven = '../PecasArmario/tudoJunto_02.svg';
@@ -90,6 +92,18 @@ var hoverObjs = [];
                     displayArmario(nItensR);
                     updateRows();
                     loadRow();
+                     
+
+                    for(let i=0; i<botoesType; i++){
+                      if(!bt.classList.contains('dark') && bt===botoesType[i]){
+                        bt.classList.add('dark');
+                      }else{
+                        if(botoesType[i].classList.contains('dark')){
+                          botoesType[i].classList.remove('dark');
+                        }
+                      }
+
+                    }
                   }
               )});
 
