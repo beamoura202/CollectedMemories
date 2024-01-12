@@ -213,6 +213,10 @@ body{
   }
 }
 
+.footerInfoTexto{
+  color: var(--castanho4);
+}
+
  /* ... (your initial styles) ... */
 
 @media (max-width: 500px) {
@@ -812,6 +816,17 @@ font-size: 1.5rem;
     position: absolute;
       
    }
+
+   .prateleiras{
+    margin-top: 0vh;
+  }
+
+  .parte1{
+    display: none;
+  }
+
+
+  
 }
 
 /*tablet*/
