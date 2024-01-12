@@ -764,6 +764,7 @@ flex-wrap: nowrap;
   height: auto;
 }
 .ImagemCanecas img {
+  object-fit: contain;
   width: auto;
   height: 100%;
 }
@@ -773,7 +774,6 @@ flex-wrap: nowrap;
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Align content at the bottom */
   padding: 20px;
   color: #ffffff; /* Text color */
 
@@ -815,6 +815,7 @@ font-size: 1.5rem;
   margin-left: 5%;
   margin-right: 5%;
   padding: 1%;
+  margin-top: 35px;
   justify-content: center;
 
 }
@@ -900,6 +901,19 @@ font-size: 1.5rem;
       
     
   }
+
+  .divTextoCanecas {
+    background-size: cover; /* or contain, depending on your preference */
+    background-position: center top;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content at the bottom */
+    
+    margin-top: 20px;
+    justify-content: center;
+  
+  }
   .ImagemCanecas{
     position: absolute;
     top:0;
@@ -929,7 +943,7 @@ justify-content: end;
     left: 0;
     z-index: -2;
     width: 100vw;
-    height:45vh;
+    height:43vh;
     background-image: url('PecasArmario/background_01.svg');
     background-size: cover;
     background-position: center center;
@@ -957,6 +971,7 @@ justify-content: end;
     display: grid;
     justify-items: center;
     align-items: end;
+    grid-template-rows: 50% 50%;
   }
   .TextoCanecas p {
     overflow-y: scroll; /* Enable scrolling on the paragraph */
@@ -979,6 +994,7 @@ justify-content: end;
    
   }
   .ImagemCanecas img {
+    object-fit: contain;
     width: 70%;
     order: 2; 
   }
@@ -1682,9 +1698,21 @@ svg{
     position: relative;
     width: 40vw;
   }
+  .footerInfo svg{
+    display: none;
+  }
+  .footerInfo{
+    display: block;
+    height: 100px;
+    width: 100%;
+  }
+  .footerSuport{
+    margin-top: 10px;
+    margin-left: 0;
+  }
 
     .footerInfoTexto{
-    
+    background-color: #dad2bc;
       width: 90%;
       height: 100%;
       /* padding: 3%; */
@@ -1692,10 +1720,12 @@ svg{
       padding-right: 10vw;
       flex-direction: row;
       
+      
       align-items: center;
     }
     .footerInfoTexto2{
       font-size: 0.8rem; 
+      flex-direction: column;
     }
     .footerTextinho{
       font-size: 0.8rem;
